@@ -1,6 +1,6 @@
 // Cabeçalho, linguagens, ritmo (horário dos commits e entregas), open source e tripulação.
 // Pouco texto de propósito: número, ícone e gráfico dizem o que cada coisa é.
-import { svg, esc, num, f, misturar, rotulo, aoVivo, barco, icone, logoDa } from "./desenho.mjs";
+import { svg, esc, num, f, misturar, barco, icone, logoDa, BRASIL } from "./desenho.mjs";
 
 const EQUIPE = [["Pedro Lahrs", "PL"], ["Vanessa Cristine", "VC"]];
 
@@ -11,56 +11,95 @@ function onda(x0, x1, y, amp, per) {
   return d;
 }
 
-export function cabecalho(t, d) {
+const ONDAS_CSS = `@keyframes d64{to{transform:translateX(-64px)}}
+@keyframes d72{to{transform:translateX(-72px)}}
+@keyframes d90{to{transform:translateX(-90px)}}
+@keyframes d110{to{transform:translateX(-110px)}}
+.balanca{transform-box:view-box;animation:balanca 6s ease-in-out infinite}
+@keyframes balanca{0%,100%{transform:translateY(2px) rotate(-2.5deg)}50%{transform:translateY(-3px) rotate(2.5deg)}}`;
+
+// Selo náutico: Curitiba e o ano de fundação girando em volta do mapa do Brasil, com o pino na cidade.
+function selo(cx, cy, t) {
+  const R = 64, rTexto = 51, escala = 0.56;
+  const mx = cx - (BRASIL.largura * escala) / 2, my = cy - (BRASIL.altura * escala) / 2;
+  const px = mx + BRASIL.curitiba[0] * escala, py = my + BRASIL.curitiba[1] * escala;
+  return `<defs><path id="volta" d="M${cx - rTexto} ${cy}a${rTexto} ${rTexto} 0 1 1 ${2 * rTexto} 0a${rTexto} ${rTexto} 0 1 1 ${-2 * rTexto} 0"/></defs>
+<circle cx="${cx}" cy="${cy}" r="${R}" fill="${t.fundo}" stroke="${t.azul}" stroke-width="2"/>
+<circle cx="${cx}" cy="${cy}" r="${R - 24}" fill="none" stroke="${t.borda}" stroke-width="1.5"/>
+<g class="gira" style="transform-origin:${cx}px ${cy}px"><text class="m" font-size="12.5" fill="${t.sec}"><textPath href="#volta" textLength="${f(2 * Math.PI * rTexto - 8)}" lengthAdjust="spacing">CURITIBA · PARANÁ · DESDE 2025 ·</textPath></text></g>
+<path transform="translate(${f(mx)} ${f(my)}) scale(${escala})" d="${BRASIL.d}" fill="${misturar(t.azul, t.fundo, 0.82)}" stroke="${t.azul}" stroke-width="${f(1.3 / escala)}" stroke-linejoin="round"/>
+<circle class="pulso" cx="${f(px)}" cy="${f(py)}" r="9" fill="${t.azul}"/>
+<circle cx="${f(px)}" cy="${f(py)}" r="3.8" fill="${t.azul}" stroke="${t.fundo}" stroke-width="1.5"/>`;
+}
+
+export function cabecalho(t) {
   const W = 1200, H = 280;
   const linhas = [
     [194, 9, 72, t.azul, 2.6, 7], [224, 7, 90, t.fraco, 2, 11], [250, 5, 110, t.borda, 2, 15],
   ].map(([y, amp, per, cor, largura, seg]) =>
     `<path style="animation:d${per} ${seg}s linear infinite" d="${onda(560, W, y, amp, per)}" fill="none" stroke="${cor}" stroke-width="${largura}" stroke-linecap="round"/>`).join("\n");
-  const css = `@keyframes d72{to{transform:translateX(-72px)}}
-@keyframes d90{to{transform:translateX(-90px)}}
-@keyframes d110{to{transform:translateX(-110px)}}
-.balanca{transform-box:view-box;animation:balanca 6s ease-in-out infinite}
-@keyframes balanca{0%,100%{transform:translateY(2px) rotate(-2.5deg)}50%{transform:translateY(-3px) rotate(2.5deg)}}`;
+  const css = `${ONDAS_CSS}
+.gira{transform-box:view-box;animation:gira 48s linear infinite}
+@keyframes gira{to{transform:rotate(360deg)}}
+.pulso{transform-box:fill-box;transform-origin:center;animation:pulso 2.4s ease-out infinite}
+@keyframes pulso{0%{transform:scale(.4);opacity:.55}100%{transform:scale(1.7);opacity:0}}`;
   const corpo = `<defs>
 <linearGradient id="esmaece" x1="560" x2="760" y1="0" y2="0" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#fff"/></linearGradient>
 <mask id="ondas"><rect x="560" y="0" width="${W - 560}" height="${H}" fill="url(#esmaece)"/></mask>
 <clipPath id="moldura"><rect x="1" y="1" width="${W - 2}" height="${H - 2}" rx="15"/></clipPath>
 </defs>
-${aoVivo(1152, 60, d.geradoEm, t, "end")}
-<text x="42" y="140" class="g" font-size="100" font-weight="800" fill="${t.tinta}" letter-spacing="-4">Konecz</text>
-<text x="48" y="188" class="g" font-size="30" font-weight="500" fill="${t.texto}">Desenvolvimento de software <tspan fill="${t.azul}" font-weight="700">IA-first</tspan></text>
-${icone("location", 46, 219, 20, t.sec)}<text x="74" y="236" class="m" font-size="16" fill="${t.sec}">Curitiba/PR</text>
-${icone("calendar", 206, 219, 20, t.sec)}<text x="234" y="236" class="m" font-size="16" fill="${t.sec}">desde 2025</text>
+<text x="42" y="150" class="g" font-size="100" font-weight="800" fill="${t.tinta}" letter-spacing="-4">Konecz</text>
+<text x="48" y="202" class="g" font-size="30" font-weight="500" fill="${t.texto}">Desenvolvimento de software <tspan fill="${t.azul}" font-weight="700">IA-first</tspan></text>
 <g clip-path="url(#moldura)"><g mask="url(#ondas)">
 ${linhas}
 </g></g>
+${selo(712, 134, t)}
 <g class="balanca" style="transform-origin:1062px 224px;animation-duration:7.5s;animation-delay:-2s">${barco(1031, 175, 2.6, { casco: t.tinta, vela: t.fundo, linha: t.tinta, traco: 2 })}</g>
 <g class="balanca" style="transform-origin:878px 194px">${barco(794, 61, 7, { casco: t.azul, vela: t.papel, linha: t.tinta, traco: 3.2 })}</g>`;
   return svg(W, H, t, corpo, css);
 }
 
 const pct = (v) => `${v.toLocaleString("pt-BR", { minimumFractionDigits: 1, maximumFractionDigits: 1 })}%`;
+const luz = (cor) => {
+  const [r, g, b] = [1, 3, 5].map((i) => parseInt(cor.slice(i, i + 2), 16) / 255);
+  return 0.2126 * r + 0.7152 * g + 0.0722 * b;
+};
 
 // Cor do logo que aparece bem no tema: logo escuro demais no fundo escuro clareia um pouco.
-function corDoLogo(cor, t) {
-  const [r, g, b] = [1, 3, 5].map((i) => parseInt(cor.slice(i, i + 2), 16) / 255);
-  const luz = 0.2126 * r + 0.7152 * g + 0.0722 * b;
-  return t.fundo === "#0d1117" && luz < 0.3 ? misturar(cor, "#ffffff", 0.45) : cor;
+const corDoLogo = (cor, t) => (t.fundo === "#0d1117" && luz(cor) < 0.3 ? misturar(cor, "#ffffff", 0.45) : cor);
+
+// Arco em volta da bolha, do topo em sentido horário, do tamanho da fatia.
+function arco(cx, cy, r, parte) {
+  const a = -Math.PI / 2 + Math.min(parte, 0.999) * 2 * Math.PI;
+  return `M${f(cx)} ${f(cy - r)}A${f(r)} ${f(r)} 0 ${parte > 0.5 ? 1 : 0} 1 ${f(cx + r * Math.cos(a))} ${f(cy + r * Math.sin(a))}`;
 }
 
-// Bolha com o logo oficial; JS e TS têm as letras vazadas, então ganham o fundo do logo original.
-function bolha(cx, cy, r, logo, t) {
-  const cor = corDoLogo(logo.cor, t);
-  const lado = r * 1.04, x = cx - lado / 2, y = cy - lado / 2;
-  const vazado = { javascript: "#000000", typescript: "#ffffff" }[logo.slug];
+// Bolha com o logo oficial e o anel da fatia; JS e TS têm as letras vazadas, então ganham o fundo do logo original.
+function bolha(cx, cy, b, t) {
+  const cor = b.logo ? corDoLogo(b.logo.cor, t) : t.sec;
+  const anel = `<circle cx="${f(cx)}" cy="${f(cy)}" r="${f(b.r + 9)}" fill="none" stroke="${t.trilha}" stroke-width="5"/>
+<path d="${arco(cx, cy, b.r + 9, b.parte)}" fill="none" stroke="${cor}" stroke-width="5" stroke-linecap="round"/>`;
+  if (!b.logo) {
+    return `${anel}<circle cx="${f(cx)}" cy="${f(cy)}" r="${f(b.r)}" fill="${t.trilha}"/>
+<text x="${f(cx)}" y="${f(cy + 7)}" text-anchor="middle" class="g" font-size="20" font-weight="700" fill="${t.sec}">+${b.resto}</text>`;
+  }
+  const lado = b.r * 1.04, x = cx - lado / 2, y = cy - lado / 2;
+  const vazado = { javascript: "#000000", typescript: "#ffffff" }[b.logo.slug];
   const fundo = vazado ? `<rect x="${f(x + lado * 0.04)}" y="${f(y + lado * 0.04)}" width="${f(lado * 0.92)}" height="${f(lado * 0.92)}" fill="${vazado}"/>` : "";
-  return `<circle cx="${f(cx)}" cy="${f(cy)}" r="${f(r)}" fill="${misturar(cor, t.fundo, 0.86)}" stroke="${misturar(cor, t.fundo, 0.55)}" stroke-width="2"/>
-${fundo}<path transform="translate(${f(x)} ${f(y)}) scale(${Math.round((lado / 24) * 1000) / 1000})" d="${logo.d}" fill="${cor}"/>`;
+  return `${anel}<circle cx="${f(cx)}" cy="${f(cy)}" r="${f(b.r)}" fill="${misturar(cor, t.fundo, 0.86)}"/>
+${fundo}<path transform="translate(${f(x)} ${f(y)}) scale(${Math.round((lado / 24) * 1000) / 1000})" d="${b.logo.d}" fill="${cor}"/>`;
+}
+
+// Etiqueta na cor da linguagem, com a fatia em número.
+function etiqueta(cx, y, texto, cor, t) {
+  const w = texto.length * 9.6 + 22;
+  const letra = luz(cor) > 0.5 ? "#0b1220" : "#ffffff";
+  return `<rect x="${f(cx - w / 2)}" y="${y - 15}" width="${f(w)}" height="30" rx="15" fill="${cor}"/>
+<text x="${f(cx)}" y="${y + 5.5}" text-anchor="middle" class="m" font-size="16" fill="${cor === t.sec ? t.fundo : letra}">${texto}</text>`;
 }
 
 export function linguagens(t, d) {
-  const W = 1200, H = 330, MAIOR = 100, MENOR = 32, VAO = 38, CHAO = 262; // as bolhas encostam no mesmo chão
+  const W = 1200, H = 344, MAIOR = 92, MENOR = 30, VAO = 34, CHAO = 262; // as bolhas encostam no mesmo chão
   const grupos = new Map();
   for (const [nome, bytes] of d.linguagens) {
     const logo = logoDa(nome), chave = logo?.slug ?? nome;
@@ -76,18 +115,16 @@ export function linguagens(t, d) {
   if (resto.length) bolhas.push({ resto: resto.length, parte: resto.reduce((s, g) => s + g.bytes, 0) / total });
   for (const b of bolhas) b.r = Math.max(MENOR, MAIOR * Math.sqrt(b.parte / bolhas[0].parte));
 
-  const largura = bolhas.reduce((s, b) => s + 2 * b.r, 0) + VAO * (bolhas.length - 1);
+  const largura = bolhas.reduce((s, b) => s + 2 * (b.r + 12), 0) + VAO * (bolhas.length - 1);
   let x = (W - largura) / 2;
   const desenho = bolhas.map((b, i) => {
-    const cx = x + b.r, cy = CHAO - b.r;
-    x += 2 * b.r + VAO;
-    const corpo = b.logo ? bolha(cx, cy, b.r, b.logo, t)
-      : `<circle cx="${f(cx)}" cy="${cy}" r="${f(b.r)}" fill="${t.trilha}" stroke="${t.borda}" stroke-width="2"/>
-<text x="${f(cx)}" y="${cy + 7}" text-anchor="middle" class="g" font-size="20" font-weight="700" fill="${t.sec}">+${b.resto}</text>`;
+    const cx = x + b.r + 12, cy = CHAO - b.r - 12;
+    x += 2 * (b.r + 12) + VAO;
+    const cor = b.logo ? corDoLogo(b.logo.cor, t) : t.sec;
     return `<g class="flutua" style="animation-duration:${(5.5 + (i % 3) * 0.9).toFixed(1)}s;animation-delay:-${(i * 1.3).toFixed(1)}s">
-${corpo}
+${bolha(cx, cy, b, t)}
 </g>
-<text x="${f(cx)}" y="${CHAO + 34}" text-anchor="middle" class="m" font-size="17" fill="${t.texto}">${pct(b.parte * 100)}</text>`;
+${etiqueta(cx, CHAO + 32, pct(b.parte * 100), cor, t)}`;
   }).join("\n");
   const css = `.flutua{animation:flutua 6s ease-in-out infinite}
 @keyframes flutua{0%,100%{transform:translateY(4px)}50%{transform:translateY(-4px)}}`;
@@ -159,18 +196,33 @@ export function ritmo(t, d) {
 ${entregas(t, d)}`);
 }
 
+const curto = (n) => (n >= 1000 ? `${(n / 1000).toLocaleString("pt-BR", { maximumFractionDigits: 1 })} mil` : num(n));
+
+// Quadradinhos de diff do GitHub: verde para linhas novas, vermelho para as removidas.
+function diff(x, y, { mais, menos }, t) {
+  const total = mais + menos || 1, verdes = Math.round((mais / total) * 5), vermelhos = Math.min(5 - verdes, Math.ceil((menos / total) * 5));
+  const quadrados = [0, 1, 2, 3, 4].map((i) => {
+    const cor = i < verdes ? t.verde : i < verdes + vermelhos ? t.vermelho : t.trilha;
+    return `<rect x="${x + i * 13}" y="${y - 12}" width="11" height="11" rx="2" fill="${cor}"/>`;
+  }).join("");
+  return `${quadrados}<text x="${x + 74}" y="${y - 1}" class="m" font-size="16" fill="${t.verde}">+${num(mais)}</text>
+<text x="${x + 82 + (num(mais).length + 1) * 9.6}" y="${y - 1}" class="m" font-size="16" fill="${t.vermelho}">−${num(menos)}</text>`;
+}
+
 // Contribuições em projetos de fora, uma linha por repositório: relato → PR → revisão → integração.
+// O barquinho navega no trecho onde a contribuição está agora.
 export function openSource(t, d) {
   const repos = new Map();
   for (const it of d.openSource) {
-    const r = repos.get(it.repo) ?? { repo: it.repo, avatar: it.avatar, prs: [], issues: [] };
+    const r = repos.get(it.repo) ?? { ...it, prs: [], issues: [] };
     (it.tipo === "pr" ? r.prs : r.issues).push(it);
     repos.set(it.repo, r);
   }
   const linhas = [...repos.values()].slice(0, 3);
-  const W = 1200, alto = 104, H = 96 + Math.max(1, linhas.length) * alto;
+  const W = 1200, alto = 136, topo = 92, H = topo + Math.max(1, linhas.length) * alto + 8;
+  const nPrs = d.openSource.filter((i) => i.tipo === "pr").length, nIssues = d.openSource.length - nPrs;
   const corpo = linhas.map((r, i) => {
-    const y = 88 + i * alto, cy = y + 34;
+    const y0 = topo + i * alto, cy = y0 + 46;
     const [dono, nome] = r.repo.split("/");
     const issue = r.issues[0], pr = r.prs[0];
     const nos = [];
@@ -181,7 +233,7 @@ export function openSource(t, d) {
       nos.push({ icone: "git-merge", feito: !!pr.integrado });
     } else if (issue) nos.push({ icone: "check", feito: issue.estado !== "aberto" });
     const atual = nos.findIndex((n) => !n.feito);
-    const xs = nos.map((_, j) => 1128 - (nos.length - 1 - j) * 104);
+    const xs = nos.map((_, j) => 1128 - (nos.length - 1 - j) * 116);
     const trilha = nos.slice(1).map((n, j) => n.feito
       ? `<line x1="${xs[j]}" y1="${cy}" x2="${xs[j + 1]}" y2="${cy}" stroke="${t.azul}" stroke-width="3"/>`
       : `<line x1="${xs[j]}" y1="${cy}" x2="${xs[j + 1]}" y2="${cy}" stroke="${t.fraco}" stroke-width="2" stroke-dasharray="5 6"/>`).join("");
@@ -191,36 +243,47 @@ export function openSource(t, d) {
       return `<g${j === atual ? ` class="vivo"` : ""}><circle cx="${xs[j]}" cy="${cy}" r="22" fill="${fundo}"${anel}/>${icone(n.icone, xs[j] - 11, cy - 11, 22, cor)}</g>`
         + (n.rotulo ? `<text x="${xs[j]}" y="${cy + 48}" text-anchor="middle" class="m" font-size="15" fill="${t.sec}">${n.rotulo}</text>` : "");
     }).join("\n");
-    const avatar = r.avatar ? `<clipPath id="av${i}"><circle cx="76" cy="${cy}" r="28"/></clipPath>
-<image href="${r.avatar}" x="48" y="${cy - 28}" width="56" height="56" clip-path="url(#av${i})"/>
-<circle cx="76" cy="${cy}" r="28" fill="none" stroke="${t.borda}" stroke-width="1.5"/>` : `${icone("repo", 62, cy - 14, 28, t.sec)}`;
-    const separa = i > 0 ? `<line x1="48" y1="${y - 14}" x2="1152" y2="${y - 14}" stroke="${t.borda}" stroke-width="1"/>` : "";
+    const bx = atual > 0 ? (xs[atual - 1] + xs[atual]) / 2 : null;
+    const navegando = bx === null ? "" : `<g class="balanca" style="transform-origin:${f(bx)}px ${cy}px">${barco(bx - 12 * 1.9, cy + 2 - 19 * 1.9, 1.9, { casco: t.azul, vela: t.papel, linha: t.tinta, traco: 1.8 })}</g>`;
+    const avatar = r.avatar ? `<clipPath id="av${i}"><circle cx="82" cy="${cy}" r="34"/></clipPath>
+<image href="${r.avatar}" x="48" y="${cy - 34}" width="68" height="68" clip-path="url(#av${i})"/>
+<circle cx="82" cy="${cy}" r="34" fill="none" stroke="${t.borda}" stroke-width="1.5"/>` : `${icone("repo", 66, cy - 16, 32, t.sec)}`;
+    const xf = 158 + curto(r.estrelas).length * 9.6 + 30;
+    const numeros = `${icone("star", 134, cy + 26, 18, t.sec)}<text x="158" y="${cy + 41}" class="m" font-size="16" fill="${t.texto}">${curto(r.estrelas)}</text>
+${icone("repo-forked", xf, cy + 26, 18, t.sec)}<text x="${xf + 24}" y="${cy + 41}" class="m" font-size="16" fill="${t.texto}">${curto(r.forks)}</text>
+${pr?.linhas ? diff(xf + 24 + curto(r.forks).length * 9.6 + 30, cy + 42, pr.linhas, t) : ""}`;
+    const separa = i > 0 ? `<line x1="48" y1="${y0 - 10}" x2="1152" y2="${y0 - 10}" stroke="${t.borda}" stroke-width="1"/>` : "";
     return `${separa}
 ${avatar}
-<text x="124" y="${cy - 4}" class="m" font-size="16" fill="${t.sec}">${esc(dono)}</text>
-<text x="124" y="${cy + 22}" class="g" font-size="24" font-weight="700" fill="${t.tinta}">${esc(nome)}</text>
+<text x="134" y="${cy - 14}" class="m" font-size="15" fill="${t.sec}">${esc(dono)}</text>
+<text x="134" y="${cy + 12}" class="g" font-size="25" font-weight="700" fill="${t.tinta}">${esc(nome)}</text>
+${numeros}
 ${trilha}
-${circulos}`;
+${circulos}
+${navegando}`;
   }).join("\n");
-  const vazio = linhas.length ? "" : `${icone("git-pull-request", 48, 100, 28, t.fraco)}`;
-  return svg(W, H, t, `${rotulo(48, 60, "open source")}\n${corpo}${vazio}`);
+  const cabeca = `${icone("git-pull-request", 48, 44, 24, t.sec)}<text x="82" y="64" class="m" font-size="20" fill="${t.tinta}">${nPrs}</text>
+${icone("issue-opened", 124, 44, 24, t.sec)}<text x="158" y="64" class="m" font-size="20" fill="${t.tinta}">${nIssues}</text>`;
+  return svg(W, H, t, `${cabeca}\n${corpo}`, ONDAS_CSS);
 }
 
-// Quem toca a Konecz.
+// Quem toca a Konecz: cada um no seu barco, com as iniciais pintadas no casco.
 export function tripulacao(t) {
-  const W = 1200, H = 200;
-  const pessoas = EQUIPE.map(([nome, iniciais], i) => {
-    const cx = 92 + i * 400, cy = 124;
-    const fundo = i === 0 ? t.azul : t.tinta, letra = i === 0 ? "#ffffff" : t.fundo;
-    return `<circle cx="${cx}" cy="${cy}" r="44" fill="${fundo}"/>
-<text x="${cx}" y="${cy + 10}" text-anchor="middle" class="g" font-size="28" font-weight="800" fill="${letra}">${iniciais}</text>
-<text x="${cx + 64}" y="${cy + 10}" class="g" font-size="30" font-weight="800" fill="${t.tinta}" letter-spacing="-.5">${esc(nome)}</text>`;
+  const W = 1200, H = 244, NIVEL = 194, S = 5;
+  const barcos = EQUIPE.map(([nome, iniciais], i) => {
+    const x = 60 + i * 560, centro = x + 12 * S;
+    const casco = i === 0 ? t.azul : t.tinta, letra = i === 0 ? "#ffffff" : t.fundo;
+    return `<g class="balanca" style="transform-origin:${centro}px ${NIVEL}px;animation-duration:${6 + i * 1.3}s;animation-delay:-${i * 2}s">
+${barco(x, NIVEL - 19 * S, S, { casco, vela: t.papel, linha: t.tinta, traco: 2.4 })}
+<text x="${centro}" y="${NIVEL - 5}" text-anchor="middle" class="g" font-size="17" font-weight="800" fill="${letra}" letter-spacing="1">${iniciais}</text>
+</g>
+<text x="${x + 136}" y="${NIVEL - 30}" class="g" font-size="32" font-weight="800" fill="${t.tinta}" letter-spacing="-.5">${esc(nome)}</text>`;
   }).join("\n");
-  const css = `.balanca{transform-box:view-box;animation:balanca 6.5s ease-in-out infinite}
-@keyframes balanca{0%,100%{transform:translateY(2px) rotate(-3deg)}50%{transform:translateY(-3px) rotate(3deg)}}
-@keyframes d64{to{transform:translateX(-64px)}}`;
-  const mar = `<clipPath id="trecho"><rect x="900" y="0" width="252" height="${H}"/></clipPath>
-<g clip-path="url(#trecho)"><path style="animation:d64 8s linear infinite" d="${onda(900, 1152, 150, 7, 64)}" fill="none" stroke="${t.azul}" stroke-width="2.4" stroke-linecap="round"/></g>
-<g class="balanca" style="transform-origin:1026px 150px">${barco(984, 84, 3.5, { casco: t.azul, vela: t.papel, linha: t.tinta, traco: 2.2 })}</g>`;
-  return svg(W, H, t, `${rotulo(48, 60, "tripulação")}\n${pessoas}\n${mar}`, css);
+  const agua = `<clipPath id="moldura"><rect x="1" y="1" width="${W - 2}" height="${H - 2}" rx="15"/></clipPath>
+<g clip-path="url(#moldura)">
+<path style="animation:d72 8s linear infinite" d="${onda(0, W, NIVEL + 2, 7, 72)}" fill="none" stroke="${t.azul}" stroke-width="2.4" stroke-linecap="round"/>
+<path style="animation:d110 14s linear infinite" d="${onda(0, W, NIVEL + 28, 5, 110)}" fill="none" stroke="${t.borda}" stroke-width="2" stroke-linecap="round"/>
+</g>`;
+  const cabeca = `${icone("people", 48, 44, 24, t.sec)}<text x="82" y="64" class="m" font-size="20" fill="${t.tinta}">${EQUIPE.length}</text>`;
+  return svg(W, H, t, `${cabeca}\n${agua}\n${barcos}`, ONDAS_CSS);
 }

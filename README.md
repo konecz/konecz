@@ -34,4 +34,4 @@
 
 <p align="center"><a href="https://konecz.com"><b>konecz.com</b></a></p>
 
-<!-- Cartões gerados por scripts/gerar.mjs com os números da API do GitHub, refeitos a cada 15 min e publicados no branch output. Fontes: Schibsted Grotesk e IBM Plex Mono (OFL, em fontes/). Logos: Simple Icons (CC0); ícones: Octicons (MIT), em icones/. -->
+<!-- Cartões gerados por scripts/gerar.mjs com os números da API do GitHub, refeitos a cada 15 min e publicados no branch output. Fontes: Schibsted Grotesk e IBM Plex Mono (OFL, em fontes/). Logos: Simple Icons (CC0); ícones: Octicons (MIT); contorno do Brasil: Natural Earth (domínio público), em icones/. -->

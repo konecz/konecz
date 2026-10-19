@@ -39,9 +39,12 @@ const PERFIL = `query($login:String!, $integrados:String!, $abertos:String!, $fo
   integrados: search(query:$integrados, type:ISSUE) { issueCount }
   abertos: search(query:$abertos, type:ISSUE) { issueCount }
   fora: search(query:$fora, type:ISSUE, first:6) { nodes { __typename
-    ... on PullRequest { number title url state merged createdAt mergedAt closedAt reviewDecision
-      reviews { totalCount } repository { nameWithOwner owner { avatarUrl(size:112) } } }
-    ... on Issue { number title url state createdAt closedAt repository { nameWithOwner owner { avatarUrl(size:112) } } } } }
+    ... on PullRequest { number title url state merged createdAt mergedAt closedAt reviewDecision additions deletions
+      reviews { totalCount } repository { ...repoDeFora } }
+    ... on Issue { number title url state createdAt closedAt repository { ...repoDeFora } } } }
+}
+fragment repoDeFora on Repository {
+  nameWithOwner stargazerCount forkCount owner { avatarUrl(size:112) }
 }`;
 
 const HISTORICO = `query($dono:String!, $nome:String!, $autor:ID!, $desde:GitTimestamp!, $depois:String) {
@@ -112,6 +115,9 @@ async function openSource(nos) {
     tipo: n.__typename === "PullRequest" ? "pr" : "issue",
     repo: n.repository.nameWithOwner,
     avatar: avatares.get(n.repository.owner.avatarUrl),
+    estrelas: n.repository.stargazerCount,
+    forks: n.repository.forkCount,
+    linhas: n.__typename === "PullRequest" ? { mais: n.additions, menos: n.deletions } : null,
     numero: n.number,
     titulo: n.title,
     url: n.url,
