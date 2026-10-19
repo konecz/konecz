@@ -1,7 +1,7 @@
 // Mar de commits: o calendário de contribuições em 3D, com a projeção calculada aqui (SVG puro, sem WebGL).
 // Cada dia é uma coluna, e a altura é o volume do dia. A onda é CSS: uma animação por diagonal da grade,
 // então o navegador move só ~60 grupos. A ordem de desenho (do fundo para a frente) vale com qualquer altura.
-import { svg, esc, num, f, misturar, rotulo, mesCurto } from "./desenho.mjs";
+import { svg, num, f, misturar, icone, mesCurto } from "./desenho.mjs";
 
 const W = 1200;
 const AREA = { x: 48, y: 150, w: 1104, h: 330 }; // o mar ocupa a largura toda; a altura do cartão sai dele
@@ -75,6 +75,7 @@ export function mar(t, d) {
   }).join("");
 
   // Hoje: o último dia do calendário leva o barquinho de papel, balançando junto com a sua diagonal.
+  // O dia recorde ganha um troféu flutuando em cima da coluna.
   const xh = nx - 1, yh = semanas[xh].findLastIndex(Boolean);
   const nHoje = semanas[xh][yh].n;
   const barco = barco3d(p, xh + 0.5, yh + 0.5, altura(nHoje), t);
@@ -82,21 +83,35 @@ export function mar(t, d) {
   const [lx, ly] = p(xh + 0.5, yh + 0.5, altura(nHoje) + 3.2);
   const marcaHoje = `<g class="o" style="animation-delay:${atraso(xh + yh)}s">
 <g class="b" style="transform-origin:${f(rx)}px ${f(ry)}px">${barco}</g>
-<text x="${f(lx)}" y="${f(ly)}" text-anchor="middle" class="m" font-size="16" fill="${t.tinta}">hoje · ${num(nHoje)}</text>
+<text x="${f(lx)}" y="${f(ly)}" text-anchor="middle" class="m" font-size="17" fill="${t.tinta}">${num(nHoje)}</text>
 </g>`;
+  const r = numeros(semanas);
+  const [tx, ty] = p(r.recorde.x + 0.5, r.recorde.y + 0.5, altura(r.recorde.n) + 0.7);
+  const marcaRecorde = `<g class="o" style="animation-delay:${atraso(r.recorde.x + r.recorde.y)}s">${icone("trophy", tx - 12, ty - 24, 24, t.tinta)}</g>`;
 
-  // Os números ficam no canto de baixo à esquerda, que a diagonal do mar deixa livre.
+  // Os números ficam no canto de baixo à esquerda, que a diagonal do mar deixa livre; ícone no lugar de legenda.
   const [ax, ay] = p(xa, yb, fundoLaje), [bx, by] = p(xb, yb, fundoLaje);
-  const yNum = Math.ceil(ay + ((740 - ax) * (by - ay)) / (bx - ax) + 70);
-  const H = Math.ceil(Math.max(yNum + 70, by + 48));
-  const resumo = numeros(semanas.flat().filter(Boolean), d.contribuicoes.total);
-  const kpis = resumo.map(([valor, legenda], i) => {
-    const x = 48 + i * 182;
-    return `<text x="${x - 2}" y="${yNum}" class="g" font-size="46" font-weight="800" fill="${i === 0 ? t.azul : t.tinta}" letter-spacing="-1.4">${valor}</text>
-<text x="${x}" y="${yNum + 30}" class="m" font-size="16" fill="${t.sec}">${esc(legenda)}</text>`;
+  const yNum = Math.ceil(ay + ((760 - ax) * (by - ay)) / (bx - ax) + 72);
+  const H = Math.ceil(Math.max(yNum + 48, by + 48));
+  const maiorDaSemana = Math.max(...r.semana.dias, 1);
+  const semana = r.semana.dias.map((n, i) => {
+    const h = Math.max(2, (n / maiorDaSemana) * 30);
+    return `<rect x="${i * 5}" y="${f(30 - h)}" width="3.6" height="${f(h)}" rx="1" fill="${t.azul}"/>`;
+  }).join("");
+  const simbolos = [
+    (x) => icone("git-commit", x, yNum - 32, 32, t.azul),
+    (x) => icone("flame", x, yNum - 32, 32, t.azul),
+    (x) => icone("trophy", x, yNum - 32, 32, t.azul),
+    (x) => `<g transform="translate(${x} ${yNum - 31})">${semana}</g>`,
+  ];
+  let xk = 48;
+  const kpis = [d.contribuicoes.total, r.seguidos, r.recorde.n, r.semana.soma].map((valor, i) => {
+    const texto = num(valor), x = xk;
+    xk += 44 + texto.length * 26 + 52;
+    return `${simbolos[i](x)}
+<text x="${x + 44}" y="${yNum}" class="g" font-size="46" font-weight="800" fill="${t.tinta}" letter-spacing="-1.4">${texto}</text>`;
   }).join("\n");
 
-  const legenda = [0, 1, 2, 3, 4].map((i) => cubinho(980 + i * 25, 89, cores[i])).join("");
   const desloca = f(AMPLITUDE * escala * ce * 100) / 100;
   const css = `.o{animation:o ${PERIODO}s ease-in-out infinite}
 @keyframes o{0%,100%{transform:translateY(${desloca}px)}50%{transform:translateY(-${desloca}px)}}
@@ -108,39 +123,30 @@ export function mar(t, d) {
 <linearGradient id="ll" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${t.lajeLado[0]}"/><stop offset="1" stop-color="${t.lajeLado[1]}"/></linearGradient>
 </defs>
 <text x="48" y="88" class="g" font-size="38" font-weight="800" fill="${t.tinta}" letter-spacing="-.8">Mar de commits</text>
-${rotulo(48, 120, "contribuições no GitHub · 12 meses")}
 ${kpis}
 ${laje}
 ${grupos.join("\n")}
 ${corte}
 ${meses}
-${marcaHoje}
-<text x="966" y="94" text-anchor="end" class="m" font-size="15" fill="${t.sec}">calmo</text>${legenda}<text x="1152" y="94" text-anchor="end" class="m" font-size="15" fill="${t.sec}">onda</text>`;
+${marcaRecorde}
+${marcaHoje}`;
   return svg(W, H, t, corpo, css);
 }
 
-// Os quatro números do cartão, tirados do próprio calendário.
-function numeros(dias, total) {
+// Os números do cartão, tirados do próprio calendário: dias seguidos, recorde e a última semana.
+function numeros(semanas) {
+  const dias = [];
+  semanas.forEach((s, x) => s.forEach((c, y) => c && dias.push({ ...c, x, y })));
   let i = dias.length - 1;
   if (dias[i].n === 0) i--; // o dia de hoje ainda pode ter zero sem quebrar a sequência
   let seguidos = 0;
   while (i >= 0 && dias[i].n > 0) { seguidos++; i--; }
-  const recorde = dias.reduce((a, b) => (b.n > a.n ? b : a));
-  const semana = dias.slice(-7).reduce((s, c) => s + c.n, 0);
-  return [
-    [num(total), "contribuições"],
-    [num(seguidos), seguidos === 1 ? "dia seguido" : "dias seguidos"],
-    [num(recorde.n), `recorde · ${recorde.data.slice(8, 10)}/${recorde.data.slice(5, 7)}`],
-    [num(semana), "últimos 7 dias"],
-  ];
-}
-
-// Cubinho da legenda, no mesmo jeito das colunas.
-function cubinho(x, y, c) {
-  const a = 8, b = 4.6, h = 6;
-  return `<path d="M${x} ${y - h - b}l${a} ${-b}l${a} ${b}l${-a} ${b}z" fill="${c.topo}"/>`
-    + `<path d="M${x} ${y - h - b}l${a} ${b}v${h}l${-a} ${-b}z" fill="${c.frente}"/>`
-    + `<path d="M${x + a} ${y - h}l${a} ${-b}v${h}l${-a} ${b}z" fill="${c.lado}"/>`;
+  const ultimos = dias.slice(-7).map((c) => c.n);
+  return {
+    seguidos,
+    recorde: dias.reduce((a, b) => (b.n > a.n ? b : a)),
+    semana: { soma: ultimos.reduce((s, n) => s + n, 0), dias: ultimos },
+  };
 }
 
 // Barquinho de papel em 3D: casco em V (painel da frente, borda de dentro) e a vela no plano do meio.

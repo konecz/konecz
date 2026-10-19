@@ -11,8 +11,13 @@
 </picture>
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/konecz/konecz/output/painel-escuro.svg">
-  <img alt="Painel: linguagens dos repositórios, horário dos commits e PRs integrados por dia." src="https://raw.githubusercontent.com/konecz/konecz/output/painel-claro.svg" width="100%">
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/konecz/konecz/output/linguagens-escuro.svg">
+  <img alt="Linguagens dos repositórios da Konecz, cada uma com o logo e a sua fatia do código." src="https://raw.githubusercontent.com/konecz/konecz/output/linguagens-claro.svg" width="100%">
+</picture>
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/konecz/konecz/output/ritmo-escuro.svg">
+  <img alt="Ritmo: os commits por hora do dia num relógio de 24 horas e os PRs integrados por dia." src="https://raw.githubusercontent.com/konecz/konecz/output/ritmo-claro.svg" width="100%">
 </picture>
 
 <a href="https://github.com/search?q=author%3Akonecz+-user%3Akonecz+is%3Apublic&amp;type=pullrequests">
@@ -22,6 +27,11 @@
   </picture>
 </a>
 
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/konecz/konecz/output/tripulacao-escuro.svg">
+  <img alt="Tripulação: Pedro Lahrs e Vanessa Cristine." src="https://raw.githubusercontent.com/konecz/konecz/output/tripulacao-claro.svg" width="100%">
+</picture>
+
 <p align="center"><a href="https://konecz.com"><b>konecz.com</b></a></p>
 
-<!-- Cartões gerados por scripts/gerar.mjs com os números da API do GitHub, refeitos a cada 15 min e publicados no branch output. Fontes: Schibsted Grotesk e IBM Plex Mono (OFL, em fontes/). -->
+<!-- Cartões gerados por scripts/gerar.mjs com os números da API do GitHub, refeitos a cada 15 min e publicados no branch output. Fontes: Schibsted Grotesk e IBM Plex Mono (OFL, em fontes/). Logos: Simple Icons (CC0); ícones: Octicons (MIT), em icones/. -->

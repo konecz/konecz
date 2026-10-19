@@ -8,7 +8,7 @@ import { parseArgs } from "node:util";
 import { coletar } from "./coletar.mjs";
 import { temas } from "./desenho.mjs";
 import { mar } from "./mar.mjs";
-import { cabecalho, painel, openSource } from "./cartoes.mjs";
+import { cabecalho, linguagens, ritmo, openSource, tripulacao } from "./cartoes.mjs";
 
 const { values: opcoes } = parseArgs({
   options: { saida: { type: "string", default: "saida" }, dados: { type: "string" }, "gravar-dados": { type: "string" } },
@@ -23,7 +23,7 @@ if (opcoes.dados) {
 }
 if (opcoes["gravar-dados"]) writeFileSync(opcoes["gravar-dados"], JSON.stringify(dados, null, 1));
 
-const cartoes = { cabecalho, mar, painel, "open-source": openSource };
+const cartoes = { cabecalho, mar, linguagens, ritmo, "open-source": openSource, tripulacao };
 mkdirSync(opcoes.saida, { recursive: true });
 for (const [nome, desenhar] of Object.entries(cartoes)) {
   for (const [tema, t] of Object.entries(temas)) writeFileSync(join(opcoes.saida, `${nome}-${tema}.svg`), desenhar(t, dados));

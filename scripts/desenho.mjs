@@ -1,4 +1,4 @@
-// Peças comuns dos cartões: temas, moldura do SVG, fontes embutidas, barquinho e formatação.
+// Peças comuns dos cartões: temas, moldura do SVG, fontes e ícones embutidos, barquinho e formatação.
 import { readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -8,6 +8,7 @@ const raiz = join(dirname(fileURLToPath(import.meta.url)), "..");
 const fonte = (arq) => readFileSync(join(raiz, "fontes", arq)).toString("base64");
 const FONTES = `@font-face{font-family:G;src:url(data:font/woff2;base64,${fonte("schibsted-grotesk-latin-wght-normal.woff2")}) format("woff2");font-weight:100 900}
 @font-face{font-family:M;src:url(data:font/woff2;base64,${fonte("ibm-plex-mono-latin-500-normal.woff2")}) format("woff2");font-weight:500}`;
+const ICONES = JSON.parse(readFileSync(join(raiz, "icones/icones.json"), "utf8"));
 
 // Azul da Konecz sobre neutros; o mar vai da água parada (nível 0) à crista (nível 4).
 export const temas = {
@@ -31,7 +32,7 @@ export const f = (n) => Math.round(n * 10) / 10;
 
 export const dataHora = (iso) => new Intl.DateTimeFormat("pt-BR", {
   timeZone: FUSO, day: "2-digit", month: "2-digit", hour: "2-digit", minute: "2-digit",
-}).format(new Date(iso)).replace(",", " às");
+}).format(new Date(iso)).replace(",", "");
 export const diaMes = (iso) => new Intl.DateTimeFormat("pt-BR", { timeZone: FUSO, day: "2-digit", month: "2-digit" }).format(new Date(iso));
 const MESES = ["jan", "fev", "mar", "abr", "mai", "jun", "jul", "ago", "set", "out", "nov", "dez"];
 export const mesCurto = (dia) => MESES[Number(dia.slice(5, 7)) - 1];
@@ -72,6 +73,18 @@ export function aoVivo(x, y, iso, t, ancora = "start") {
   return `<circle class="vivo" cx="${x0 + 5}" cy="${y - 5}" r="5" fill="${t.azul}"/>
 <text x="${x0 + 20}" y="${y}" class="m" font-size="15" fill="${t.sec}">${esc(texto)}</text>`;
 }
+
+// Ícone do Octicons (grade 24) com o canto de cima à esquerda em (x, y).
+export function icone(nome, x, y, tam, cor, extra = "") {
+  return `<path transform="translate(${f(x)} ${f(y)}) scale(${Math.round((tam / 24) * 1000) / 1000})" d="${ICONES.octicons[nome]}" fill="${cor}"${extra}/>`;
+}
+
+// Linguagem do GitHub → logo oficial (Simple Icons). Linguagens irmãs dividem o logo, como Go e Go Template.
+const LOGOS = {
+  PHP: "php", TypeScript: "typescript", JavaScript: "javascript", Elixir: "elixir", Go: "go", "Go Template": "go",
+  CSS: "css", Python: "python", HTML: "html5", PLpgSQL: "postgresql", Shell: "gnubash", Blade: "laravel", Dockerfile: "docker",
+};
+export const logoDa = (linguagem) => (LOGOS[linguagem] ? { slug: LOGOS[linguagem], ...ICONES.logos[LOGOS[linguagem]] } : null);
 
 // O barquinho de papel da Konecz, em grade 24 (o mesmo desenho do site e do Vigia Pix).
 export function barco(x, y, s, { casco, vela, linha, traco = 1.8 }) {
