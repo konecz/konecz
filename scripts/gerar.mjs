@@ -136,7 +136,7 @@ function linguagens(t) {
 ${titulo(72, 92, "Linguagens", 186, t)}
 ${barras}
 ${tiles}
-<text x="72" y="${H - 40}" class="m" font-size="13" fill="${t.secundario}">fonte: GitHub, bytes de código nos ${dados.repositorios} repositórios da konecz, ${dados.referencia}</text>`;
+<text x="72" y="${H - 40}" class="m" font-size="16" fill="${t.secundario}">fonte: GitHub, bytes de código nos ${dados.repositorios} repositórios da konecz, ${dados.referencia}</text>`;
   return svg(W, H, t, corpo);
 }
 
@@ -152,16 +152,16 @@ function openSource(t) {
     const marcador = p.pendente
       ? `<circle cx="${cx}" cy="${yTrilho}" r="15" fill="${t.fundo}" stroke="${t.secundario}" stroke-width="2"${tracejado}/>`
       : `<circle cx="${cx}" cy="${yTrilho}" r="15" fill="${t.grifo}"/>`;
-    const wPill = p.estado.length * 8.6 + 26;
+    const wPill = p.estado.length * 9.8 + 28;
     return `<g>
 ${marcador}
-<text x="${cx}" y="${yTrilho + 5}" text-anchor="middle" class="m" font-size="14" fill="${p.pendente ? t.secundario : "#fff"}">${i + 1}</text>
+<text x="${cx}" y="${yTrilho + 5}" text-anchor="middle" class="m" font-size="16" fill="${p.pendente ? t.secundario : "#fff"}">${i + 1}</text>
 <rect x="${x}" y="${yCard}" width="${wCard}" height="${hCard}" rx="14" fill="none" stroke="${p.pendente ? t.secundario : t.linha}" stroke-width="1.5"${tracejado}/>
-<text x="${x + 24}" y="${yCard + 36}" class="m" font-size="13" fill="${t.secundario}" letter-spacing="1">${p.tipo.toUpperCase()}</text>
+<text x="${x + 24}" y="${yCard + 36}" class="m" font-size="16" fill="${t.secundario}" letter-spacing="1">${p.tipo.toUpperCase()}</text>
 <text x="${x + 24}" y="${yCard + 72}" class="g" font-size="27" font-weight="800" fill="${cor}" letter-spacing="-.4">${esc(p.titulo)}</text>
 <text x="${x + 24}" y="${yCard + 100}" class="g" font-size="16" fill="${t.texto}">${esc(p.detalhe)}</text>
 <rect x="${x + 24}" y="${yCard + 120}" width="${wPill}" height="30" rx="15" fill="none" stroke="${p.pendente ? t.secundario : t.grifo}" stroke-width="1.5"${tracejado}/>
-<text x="${x + 24 + wPill / 2}" y="${yCard + 140}" text-anchor="middle" class="m" font-size="14" fill="${p.pendente ? t.secundario : t.grifo}">${esc(p.estado)}</text>
+<text x="${x + 24 + wPill / 2}" y="${yCard + 140}" text-anchor="middle" class="m" font-size="16" fill="${p.pendente ? t.secundario : t.grifo}">${esc(p.estado)}</text>
 </g>`;
   }).join("\n");
   const xFim = x0 + (n - 1) * (wCard + gap) + 24;
@@ -172,7 +172,7 @@ ${titulo(72, 92, "Open source", 206, t)}
 <line x1="${x0 + 24}" y1="${yTrilho}" x2="${xMeio}" y2="${yTrilho}" stroke="${t.grifo}" stroke-width="3"/>
 <line x1="${xMeio}" y1="${yTrilho}" x2="${xFim}" y2="${yTrilho}" stroke="${t.secundario}" stroke-width="2" stroke-dasharray="7 6"/>
 ${passos}
-<text x="72" y="${H - 34}" class="m" font-size="13" fill="${t.secundario}">Querido Diário, da Open Knowledge Brasil: diários oficiais dos municípios abertos para todo mundo</text>`;
+<text x="72" y="${H - 34}" class="m" font-size="16" fill="${t.secundario}">Querido Diário, da Open Knowledge Brasil: diários oficiais dos municípios abertos para todo mundo</text>`;
   return svg(W, H, t, corpo);
 }
 
@@ -192,8 +192,8 @@ function equipe(t) {
   const bx = 500, by = 48, bw = 652, bh = H - 96;
   const campos = dados.empresa.map(([k, v], i) => {
     const y = by + 104 + i * 46;
-    return `<text x="${bx + 36}" y="${y}" class="m" font-size="13" fill="${t.blocoSec}" letter-spacing="1">${esc(k.toUpperCase())}</text>
-<text x="${bx + 176}" y="${y}" class="${k === "CNPJ" ? "m" : "g"}" font-size="${k === "CNPJ" ? 19 : 18}" font-weight="${k === "CNPJ" ? 500 : 600}" fill="${t.blocoTexto}">${esc(v)}</text>`;
+    return `<text x="${bx + 36}" y="${y}" class="m" font-size="16" fill="${t.blocoSec}" letter-spacing="1">${esc(k.toUpperCase())}</text>
+<text x="${bx + 204}" y="${y}" class="${k === "CNPJ" ? "m" : "g"}" font-size="${k === "CNPJ" ? 19 : 18}" font-weight="${k === "CNPJ" ? 500 : 600}" fill="${t.blocoTexto}">${esc(v)}</text>`;
   }).join("\n");
   const corpo = `
 ${titulo(72, 92, "Quem toca", 170, t)}

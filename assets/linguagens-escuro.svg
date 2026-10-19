@@ -49,5 +49,5 @@
 <line x1="900" y1="326" x2="1128" y2="326" stroke="#262d38" stroke-width="1.5"/>
 <text x="900" y="382" class="g" font-size="52" font-weight="800" fill="#f0f3f6" letter-spacing="-1.5" style="font-variant-numeric:tabular-nums">12</text>
 <text x="900" y="410" class="m" font-size="15" fill="#8b94a3">repositórios</text>
-<text x="72" y="460" class="m" font-size="13" fill="#8b94a3">fonte: GitHub, bytes de código nos 12 repositórios da konecz, 19/10/2026</text>
+<text x="72" y="460" class="m" font-size="16" fill="#8b94a3">fonte: GitHub, bytes de código nos 12 repositórios da konecz, 19/10/2026</text>
 </svg>

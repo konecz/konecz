@@ -32,16 +32,16 @@
 </g>
 <text x="536" y="100" class="g" font-size="22" font-weight="800" fill="#fff">A empresa</text>
 <line x1="536" y1="118" x2="1116" y2="118" stroke="#22367a" stroke-width="1.5"/>
-<text x="536" y="152" class="m" font-size="13" fill="#9fb2e8" letter-spacing="1">RAZÃO SOCIAL</text>
-<text x="676" y="152" class="g" font-size="18" font-weight="600" fill="#e9eefb">Konecz Tecnologia e Inteligência Artificial LTDA</text>
-<text x="536" y="198" class="m" font-size="13" fill="#9fb2e8" letter-spacing="1">CNPJ</text>
-<text x="676" y="198" class="m" font-size="19" font-weight="500" fill="#e9eefb">67.685.840/0001-06</text>
-<text x="536" y="244" class="m" font-size="13" fill="#9fb2e8" letter-spacing="1">ABERTURA</text>
-<text x="676" y="244" class="g" font-size="18" font-weight="600" fill="#e9eefb">03/06/2026</text>
-<text x="536" y="290" class="m" font-size="13" fill="#9fb2e8" letter-spacing="1">CNAE</text>
-<text x="676" y="290" class="g" font-size="18" font-weight="600" fill="#e9eefb">62.04-0-00 · Consultoria em TI</text>
-<text x="536" y="336" class="m" font-size="13" fill="#9fb2e8" letter-spacing="1">ENDEREÇO</text>
-<text x="676" y="336" class="g" font-size="18" font-weight="600" fill="#e9eefb">R. Brigadeiro Franco, 3336 · Água Verde</text>
-<text x="536" y="382" class="m" font-size="13" fill="#9fb2e8" letter-spacing="1">CIDADE</text>
-<text x="676" y="382" class="g" font-size="18" font-weight="600" fill="#e9eefb">Curitiba/PR · CEP 80.250-042</text>
+<text x="536" y="152" class="m" font-size="16" fill="#9fb2e8" letter-spacing="1">RAZÃO SOCIAL</text>
+<text x="704" y="152" class="g" font-size="18" font-weight="600" fill="#e9eefb">Konecz Tecnologia e Inteligência Artificial LTDA</text>
+<text x="536" y="198" class="m" font-size="16" fill="#9fb2e8" letter-spacing="1">CNPJ</text>
+<text x="704" y="198" class="m" font-size="19" font-weight="500" fill="#e9eefb">67.685.840/0001-06</text>
+<text x="536" y="244" class="m" font-size="16" fill="#9fb2e8" letter-spacing="1">ABERTURA</text>
+<text x="704" y="244" class="g" font-size="18" font-weight="600" fill="#e9eefb">03/06/2026</text>
+<text x="536" y="290" class="m" font-size="16" fill="#9fb2e8" letter-spacing="1">CNAE</text>
+<text x="704" y="290" class="g" font-size="18" font-weight="600" fill="#e9eefb">62.04-0-00 · Consultoria em TI</text>
+<text x="536" y="336" class="m" font-size="16" fill="#9fb2e8" letter-spacing="1">ENDEREÇO</text>
+<text x="704" y="336" class="g" font-size="18" font-weight="600" fill="#e9eefb">R. Brigadeiro Franco, 3336 · Água Verde</text>
+<text x="536" y="382" class="m" font-size="16" fill="#9fb2e8" letter-spacing="1">CIDADE</text>
+<text x="704" y="382" class="g" font-size="18" font-weight="600" fill="#e9eefb">Curitiba/PR · CEP 80.250-042</text>
 </svg>
