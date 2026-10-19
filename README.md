@@ -23,7 +23,7 @@
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/equipe-escuro.svg">
-  <img alt="Gerida por Pedro Lahr e Vanessa Cristine. Konecz Tecnologia e Inteligência Artificial LTDA, CNPJ 67.685.840/0001-06, R. Brigadeiro Franco, 3336, Água Verde, Curitiba/PR." src="assets/equipe-claro.svg" width="100%">
+  <img alt="Gerida por Pedro Lahrs e Vanessa Cristine. Konecz Tecnologia e Inteligência Artificial LTDA, CNPJ 67.685.840/0001-06, R. Brigadeiro Franco, 3336, Água Verde, Curitiba/PR." src="assets/equipe-claro.svg" width="100%">
 </picture>
 
 <!-- Cartões gerados por scripts/gerar.mjs a partir de scripts/dados.json. Fontes: Schibsted Grotesk e IBM Plex Mono (OFL, em fontes/). -->
