@@ -1,0 +1,55 @@
+{
+  "referencia": "19/10/2026",
+  "linguagens": {
+    "PHP": 3838219,
+    "TypeScript": 2994484,
+    "JavaScript": 917304,
+    "Elixir": 246372,
+    "CSS": 159535,
+    "Go": 47343,
+    "HTML": 18451,
+    "PLpgSQL": 16914,
+    "Shell": 12032,
+    "Blade": 5141,
+    "Dockerfile": 3548
+  },
+  "repositorios": 12,
+  "commits": 3337,
+  "prsIntegrados": 425,
+  "openSource": [
+    {
+      "tipo": "Relato",
+      "titulo": "API fora do ar",
+      "detalhe": "HTTP 522 em todas as consultas",
+      "ref": "issue",
+      "estado": "aberta"
+    },
+    {
+      "tipo": "Correção",
+      "titulo": "PR #114",
+      "detalhe": "Endpoints bloqueantes no threadpool",
+      "ref": "Python",
+      "estado": "em revisão"
+    },
+    {
+      "tipo": "Integração",
+      "titulo": "Merge na main",
+      "detalhe": "Aguardando a revisão da OKBR",
+      "ref": "próximo",
+      "estado": "pendente",
+      "pendente": true
+    }
+  ],
+  "equipe": [
+    { "nome": "Pedro Lahr", "iniciais": "PL", "papel": "Gestão" },
+    { "nome": "Vanessa Cristine", "iniciais": "VC", "papel": "Gestão" }
+  ],
+  "empresa": [
+    ["Razão social", "Konecz Tecnologia e Inteligência Artificial LTDA"],
+    ["CNPJ", "67.685.840/0001-06"],
+    ["Abertura", "03/06/2026"],
+    ["CNAE", "62.04-0-00 · Consultoria em TI"],
+    ["Endereço", "R. Brigadeiro Franco, 3336 · Água Verde"],
+    ["Cidade", "Curitiba/PR · CEP 80.250-042"]
+  ]
+}
