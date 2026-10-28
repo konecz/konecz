@@ -59,7 +59,8 @@ ${selo(712, 134, t)}
   return svg(W, H, t, corpo, css);
 }
 
-const pct = (v) => `${v.toLocaleString("pt-BR", { minimumFractionDigits: 1, maximumFractionDigits: 1 })}%`;
+// Fatia que arredonda para 0,0% mas existe vira "<0,1%".
+const pct = (v) => (v > 0 && v < 0.05 ? "<0,1%" : `${v.toLocaleString("pt-BR", { minimumFractionDigits: 1, maximumFractionDigits: 1 })}%`);
 const luz = (cor) => {
   const [r, g, b] = [1, 3, 5].map((i) => parseInt(cor.slice(i, i + 2), 16) / 255);
   return 0.2126 * r + 0.7152 * g + 0.0722 * b;
@@ -106,7 +107,7 @@ function etiqueta(cx, y, texto, cor, t) {
   const w = texto.length * 9.6 + 22;
   const letra = luz(cor) > 0.5 ? "#0b1220" : "#ffffff";
   return `<rect x="${f(cx - w / 2)}" y="${y - 15}" width="${f(w)}" height="30" rx="15" fill="${cor}"/>
-<text x="${f(cx)}" y="${y + 5.5}" text-anchor="middle" class="m" font-size="16" fill="${cor === t.sec ? t.fundo : letra}">${texto}</text>`;
+<text x="${f(cx)}" y="${y + 5.5}" text-anchor="middle" class="m" font-size="16" fill="${cor === t.sec ? t.fundo : letra}">${esc(texto)}</text>`;
 }
 
 // Linguagens agrupadas pelo logo (Go e Go Template viram uma), da maior para a menor, com a fatia de cada.

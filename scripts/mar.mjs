@@ -99,7 +99,7 @@ export function mar(t, d) {
     return `<rect x="${i * 5}" y="${f(30 - h)}" width="3.6" height="${f(h)}" rx="1" fill="${t.azul}"/>`;
   }).join("");
   const simbolos = [
-    (x) => icone("git-commit", x, yNum - 32, 32, t.azul),
+    (x) => icone("calendar", x, yNum - 32, 32, t.azul), // contribuições do ano (commits, PRs, revisões), não só commits
     (x) => icone("flame", x, yNum - 32, 32, t.azul),
     (x) => icone("trophy", x, yNum - 32, 32, t.azul),
     (x) => `<g transform="translate(${x} ${yNum - 31})">${semana}</g>`,
