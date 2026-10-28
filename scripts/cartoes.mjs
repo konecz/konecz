@@ -79,6 +79,14 @@ function bolha(cx, cy, b, t) {
   const cor = b.logo ? corDoLogo(b.logo.cor, t) : t.sec;
   const anel = `<circle cx="${f(cx)}" cy="${f(cy)}" r="${f(b.r + 9)}" fill="none" stroke="${t.trilha}" stroke-width="5"/>
 <path d="${arco(cx, cy, b.r + 9, b.parte)}" fill="none" stroke="${cor}" stroke-width="5" stroke-linecap="round"/>`;
+  if (!b.logo && !b.resto) {
+    // Nome inteiro se couber com 15 px ou mais; senão, as duas primeiras letras.
+    const cabe = (b.r * 1.6) / (b.nome.length * 0.62);
+    const texto = cabe >= 15 ? b.nome : b.nome.slice(0, 2);
+    const tam = Math.min(30, cabe >= 15 ? cabe : (b.r * 1.6) / (texto.length * 0.62));
+    return `${anel}<circle cx="${f(cx)}" cy="${f(cy)}" r="${f(b.r)}" fill="${t.trilha}"/>
+<text x="${f(cx)}" y="${f(cy + tam * 0.36)}" text-anchor="middle" class="g" font-size="${f(tam)}" font-weight="800" fill="${t.sec}">${texto}</text>`;
+  }
   if (!b.logo) {
     return `${anel}<circle cx="${f(cx)}" cy="${f(cy)}" r="${f(b.r)}" fill="${t.trilha}"/>
 <text x="${f(cx)}" y="${f(cy + 7)}" text-anchor="middle" class="g" font-size="20" font-weight="700" fill="${t.sec}">+${b.resto}</text>`;
@@ -103,15 +111,15 @@ export function linguagens(t, d) {
   const grupos = new Map();
   for (const [nome, bytes] of d.linguagens) {
     const logo = logoDa(nome), chave = logo?.slug ?? nome;
-    const g = grupos.get(chave) ?? { logo, bytes: 0 };
+    const g = grupos.get(chave) ?? { nome, logo, bytes: 0 };
     g.bytes += bytes;
     grupos.set(chave, g);
   }
   const lista = [...grupos.values()].sort((a, b) => b.bytes - a.bytes);
   const total = lista.reduce((s, g) => s + g.bytes, 0) || 1;
-  const comLogo = lista.filter((g) => g.logo).slice(0, 6);
-  const resto = lista.filter((g) => !comLogo.includes(g));
-  const bolhas = comLogo.map((g) => ({ ...g, parte: g.bytes / total }));
+  // As 6 maiores aparecem sempre; a que não tem logo em LOGOS ganha o nome escrito na bolha.
+  const bolhas = lista.slice(0, 6).map((g) => ({ ...g, parte: g.bytes / total }));
+  const resto = lista.slice(6);
   if (resto.length) bolhas.push({ resto: resto.length, parte: resto.reduce((s, g) => s + g.bytes, 0) / total });
   for (const b of bolhas) b.r = Math.max(MENOR, MAIOR * Math.sqrt(b.parte / bolhas[0].parte));
 

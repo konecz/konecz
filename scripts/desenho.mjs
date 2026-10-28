@@ -65,6 +65,7 @@ export function icone(nome, x, y, tam, cor, extra = "") {
 const LOGOS = {
   PHP: "php", TypeScript: "typescript", JavaScript: "javascript", Elixir: "elixir", Go: "go", "Go Template": "go",
   CSS: "css", Python: "python", HTML: "html5", PLpgSQL: "postgresql", Shell: "gnubash", Blade: "laravel", Dockerfile: "docker",
+  "C#": "dotnet", // o Simple Icons não tem o logo do C#; fica o da plataforma
 };
 export const logoDa = (linguagem) => (LOGOS[linguagem] ? { slug: LOGOS[linguagem], ...ICONES.logos[LOGOS[linguagem]] } : null);
 
