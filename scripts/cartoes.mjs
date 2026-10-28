@@ -65,8 +65,11 @@ const luz = (cor) => {
   return 0.2126 * r + 0.7152 * g + 0.0722 * b;
 };
 
-// Cor do logo que aparece bem no tema: logo escuro demais no fundo escuro clareia um pouco.
-const corDoLogo = (cor, t) => (t.fundo === "#0d1117" && luz(cor) < 0.3 ? misturar(cor, "#ffffff", 0.45) : cor);
+// Cor do logo que aparece bem no tema: logo escuro demais no fundo escuro clareia um pouco, e claro demais no fundo claro escurece.
+const corDoLogo = (cor, t) => {
+  if (t.fundo === "#0d1117") return luz(cor) < 0.3 ? misturar(cor, "#ffffff", 0.45) : cor;
+  return luz(cor) > 0.85 ? misturar(cor, "#000000", 0.6) : cor;
+};
 
 // Arco em volta da bolha, do topo em sentido horário, do tamanho da fatia.
 function arco(cx, cy, r, parte) {
@@ -152,14 +155,15 @@ ${desenho}`;
 const seta = (cx, y, t) => `<path d="M${f(cx - 9)} ${y - 4}l9 8l9-8" fill="none" stroke="${t.sec}" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>`;
 
 // As linguagens que ficaram no +N, todas do mesmo tamanho, que aparecem ao abrir o cartão de linguagens.
+// Até 7 por linha; a última linha fica centralizada.
 export function linguagensMais(t, d) {
   const resto = gruposDeLinguagens(d).slice(VISIVEIS);
-  const W = 1200, R = 40, VAO = 44, CHAO = 136, H = resto.length ? 214 : 1;
-  const passo = 2 * (R + 12) + VAO;
-  let x = (W - passo * resto.length + VAO) / 2;
-  const desenho = resto.map((g) => {
-    const cx = x + R + 12, cy = CHAO - R - 12;
-    x += passo;
+  const W = 1200, R = 40, VAO = 44, POR_LINHA = 7, LINHA = 178, passo = 2 * (R + 12) + VAO;
+  const linhas = Math.ceil(resto.length / POR_LINHA), H = linhas ? 214 + (linhas - 1) * LINHA : 1;
+  const desenho = resto.map((g, i) => {
+    const linha = Math.floor(i / POR_LINHA), naLinha = Math.min(POR_LINHA, resto.length - linha * POR_LINHA);
+    const CHAO = 136 + linha * LINHA;
+    const cx = (W - passo * naLinha + VAO) / 2 + (i % POR_LINHA) * passo + R + 12, cy = CHAO - R - 12;
     return `${bolha(cx, cy, { ...g, r: R }, t)}
 ${etiqueta(cx, CHAO + 32, pct(g.parte * 100), g.logo ? corDoLogo(g.logo.cor, t) : t.sec, t)}`;
   }).join("\n");

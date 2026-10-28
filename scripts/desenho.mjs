@@ -66,6 +66,21 @@ const LOGOS = {
   PHP: "php", TypeScript: "typescript", JavaScript: "javascript", Elixir: "elixir", Go: "go", "Go Template": "go",
   CSS: "css", Python: "python", HTML: "html5", PLpgSQL: "postgresql", Shell: "gnubash", Blade: "laravel", Dockerfile: "docker",
   "C#": "dotnet", // o Simple Icons não tem o logo do C#; fica o da plataforma
+  // Biblioteca pronta: linguagens comuns do GitHub (nome do Linguist) → logo, para aparecerem sozinhas quando surgirem.
+  Java: "openjdk", Kotlin: "kotlin", Scala: "scala", Groovy: "apachegroovy", Clojure: "clojure", Rust: "rust",
+  C: "c", "C++": "cplusplus", Zig: "zig", Nim: "nim", D: "d", V: "v", Odin: "odin", Ada: "ada", Fortran: "fortran",
+  "F#": "fsharp", "Visual Basic .NET": "dotnet", "ASP.NET": "dotnet", Razor: "dotnet", Ruby: "ruby",
+  "Jupyter Notebook": "jupyter", R: "r", Julia: "julia", Perl: "perl", Lua: "lua", Luau: "luau",
+  Mathematica: "wolframmathematica", Haxe: "haxe", Swift: "swift", Dart: "dart", Haskell: "haskell", OCaml: "ocaml",
+  Elm: "elm", PureScript: "purescript", Erlang: "erlang", Gleam: "gleam", Crystal: "crystal", Racket: "racket",
+  "Common Lisp": "commonlisp", "Emacs Lisp": "gnuemacs", "Vim Script": "vim", Reason: "reason", ReScript: "rescript",
+  Solidity: "solidity", WebAssembly: "webassembly", CoffeeScript: "coffeescript", Vue: "vuedotjs", Svelte: "svelte",
+  Astro: "astro", SCSS: "sass", Sass: "sass", Less: "less", Stylus: "stylus", Pug: "pug", EJS: "ejs", Jinja: "jinja",
+  Twig: "symfony", Liquid: "shopify", MDX: "mdx", Markdown: "markdown", TeX: "latex", Nix: "nixos", HCL: "terraform",
+  Makefile: "gnu", CMake: "cmake", Starlark: "bazel", Nginx: "nginx", Puppet: "puppet", Nushell: "nushell",
+  fish: "fishshell", GraphQL: "graphql", Prisma: "prisma", YAML: "yaml", TOML: "toml", JSON: "json",
+  OpenSCAD: "openscad", GDScript: "godotengine", ShaderLab: "unity", GLSL: "opengl", Cuda: "nvidia", LLVM: "llvm",
+  Vala: "vala",
 };
 export const logoDa = (linguagem) => (LOGOS[linguagem] ? { slug: LOGOS[linguagem], ...ICONES.logos[LOGOS[linguagem]] } : null);
 
