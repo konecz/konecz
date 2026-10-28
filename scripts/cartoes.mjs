@@ -106,8 +106,8 @@ function etiqueta(cx, y, texto, cor, t) {
 <text x="${f(cx)}" y="${y + 5.5}" text-anchor="middle" class="m" font-size="16" fill="${cor === t.sec ? t.fundo : letra}">${texto}</text>`;
 }
 
-export function linguagens(t, d) {
-  const W = 1200, H = 344, MAIOR = 92, MENOR = 30, VAO = 34, CHAO = 262; // as bolhas encostam no mesmo chão
+// Linguagens agrupadas pelo logo (Go e Go Template viram uma), da maior para a menor, com a fatia de cada.
+function gruposDeLinguagens(d) {
   const grupos = new Map();
   for (const [nome, bytes] of d.linguagens) {
     const logo = logoDa(nome), chave = logo?.slug ?? nome;
@@ -117,10 +117,17 @@ export function linguagens(t, d) {
   }
   const lista = [...grupos.values()].sort((a, b) => b.bytes - a.bytes);
   const total = lista.reduce((s, g) => s + g.bytes, 0) || 1;
+  return lista.map((g) => ({ ...g, parte: g.bytes / total }));
+}
+const VISIVEIS = 6;
+
+export function linguagens(t, d) {
+  const W = 1200, H = 344, MAIOR = 92, MENOR = 30, VAO = 34, CHAO = 262; // as bolhas encostam no mesmo chão
+  const lista = gruposDeLinguagens(d);
   // As 6 maiores aparecem sempre; a que não tem logo em LOGOS ganha o nome escrito na bolha.
-  const bolhas = lista.slice(0, 6).map((g) => ({ ...g, parte: g.bytes / total }));
-  const resto = lista.slice(6);
-  if (resto.length) bolhas.push({ resto: resto.length, parte: resto.reduce((s, g) => s + g.bytes, 0) / total });
+  const bolhas = lista.slice(0, VISIVEIS);
+  const resto = lista.slice(VISIVEIS);
+  if (resto.length) bolhas.push({ resto: resto.length, parte: resto.reduce((s, g) => s + g.parte, 0) });
   for (const b of bolhas) b.r = Math.max(MENOR, MAIOR * Math.sqrt(b.parte / bolhas[0].parte));
 
   const largura = bolhas.reduce((s, b) => s + 2 * (b.r + 12), 0) + VAO * (bolhas.length - 1);
@@ -132,13 +139,31 @@ export function linguagens(t, d) {
     return `<g class="flutua" style="animation-duration:${(5.5 + (i % 3) * 0.9).toFixed(1)}s;animation-delay:-${(i * 1.3).toFixed(1)}s">
 ${bolha(cx, cy, b, t)}
 </g>
-${etiqueta(cx, CHAO + 32, pct(b.parte * 100), cor, t)}`;
+${etiqueta(cx, CHAO + 32, pct(b.parte * 100), cor, t)}${b.resto ? seta(cx, CHAO + 62, t) : ""}`;
   }).join("\n");
   const css = `.flutua{animation:flutua 6s ease-in-out infinite}
 @keyframes flutua{0%,100%{transform:translateY(4px)}50%{transform:translateY(-4px)}}`;
   const corpo = `${icone("repo", 48, 44, 24, t.sec)}<text x="82" y="64" class="m" font-size="20" fill="${t.tinta}">${num(d.repositorios)}</text>
 ${desenho}`;
   return svg(W, H, t, corpo, css);
+}
+
+// Setinha embaixo do +N: o cartão é o <summary> de um <details> no README, e clicar abre as outras linguagens.
+const seta = (cx, y, t) => `<path d="M${f(cx - 9)} ${y - 4}l9 8l9-8" fill="none" stroke="${t.sec}" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>`;
+
+// As linguagens que ficaram no +N, todas do mesmo tamanho, que aparecem ao abrir o cartão de linguagens.
+export function linguagensMais(t, d) {
+  const resto = gruposDeLinguagens(d).slice(VISIVEIS);
+  const W = 1200, R = 40, VAO = 44, CHAO = 136, H = resto.length ? 214 : 1;
+  const passo = 2 * (R + 12) + VAO;
+  let x = (W - passo * resto.length + VAO) / 2;
+  const desenho = resto.map((g) => {
+    const cx = x + R + 12, cy = CHAO - R - 12;
+    x += passo;
+    return `${bolha(cx, cy, { ...g, r: R }, t)}
+${etiqueta(cx, CHAO + 32, pct(g.parte * 100), g.logo ? corDoLogo(g.logo.cor, t) : t.sec, t)}`;
+  }).join("\n");
+  return svg(W, H, t, desenho);
 }
 
 function setor(cx, cy, r0, r1, a0, a1) {

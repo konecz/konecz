@@ -10,10 +10,16 @@
   <img alt="Mar de commits: as contribuições do último ano no GitHub em 3D, um dia por coluna, com o barquinho de papel no dia de hoje." src="https://raw.githubusercontent.com/konecz/konecz/output/mar-claro.svg" width="100%">
 </picture>
 
-<picture>
+<details>
+<summary><picture>
   <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/konecz/konecz/output/linguagens-escuro.svg">
-  <img alt="Linguagens dos repositórios da Konecz, cada uma com o logo e a sua fatia do código." src="https://raw.githubusercontent.com/konecz/konecz/output/linguagens-claro.svg" width="100%">
+  <img alt="Linguagens dos repositórios da Konecz, cada uma com o logo e a sua fatia do código. Clique para ver as outras." src="https://raw.githubusercontent.com/konecz/konecz/output/linguagens-claro.svg" width="100%">
+</picture></summary>
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/konecz/konecz/output/linguagens-mais-escuro.svg">
+  <img alt="As outras linguagens, as que ficam no +N do cartão de cima." src="https://raw.githubusercontent.com/konecz/konecz/output/linguagens-mais-claro.svg" width="100%">
 </picture>
+</details>
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/konecz/konecz/output/ritmo-escuro.svg">
