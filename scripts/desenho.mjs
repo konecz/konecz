@@ -44,7 +44,6 @@ ${FONTES}
 .vivo{animation:vivo 2.4s ease-in-out infinite}
 @keyframes vivo{0%,100%{opacity:1}50%{opacity:.25}}
 ${css}
-@media (prefers-reduced-motion:reduce){*{animation:none!important}}
 </style>
 <rect width="${w}" height="${h}" rx="16" fill="${t.fundo}"/>
 <rect x=".5" y=".5" width="${w - 1}" height="${h - 1}" rx="15.5" fill="none" stroke="${t.borda}"/>
