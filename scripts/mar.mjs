@@ -62,8 +62,8 @@ export function mar(t, d) {
   // O corte de água na frente e na direita esconde o pé das colunas.
   const xa = vao, xb = nx - vao, ya = vao, yb = ny - vao;
   const laje = `<path d="${caminho(p(xa, ya, topoLaje), p(xb, ya, topoLaje), p(xb, yb, topoLaje), p(xa, yb, topoLaje))}" fill="${cores[0].lado}"/>`;
-  const corte = `<path d="${caminho(p(xa, yb, topoLaje), p(xb, yb, topoLaje), p(xb, yb, fundoLaje), p(xa, yb, fundoLaje))}" fill="url(#lf)"/>
-<path d="${caminho(p(xb, ya, topoLaje), p(xb, yb, topoLaje), p(xb, yb, fundoLaje), p(xb, ya, fundoLaje))}" fill="url(#ll)"/>`;
+  const corte = `<path d="${caminho(p(xa, yb, topoLaje), p(xb, yb, topoLaje), p(xb, yb, fundoLaje), p(xa, yb, fundoLaje))}" fill="${t.laje}"/>
+<path d="${caminho(p(xb, ya, topoLaje), p(xb, yb, topoLaje), p(xb, yb, fundoLaje), p(xb, ya, fundoLaje))}" fill="${t.lajeLado}"/>`;
 
   // Meses gravados no corte, deitados no plano da frente.
   const inicios = semanas.map((s, x) => [x, s.find((c) => c?.data.endsWith("-01"))]).filter(([, c]) => c);
@@ -118,11 +118,7 @@ export function mar(t, d) {
 .b{transform-box:view-box;animation:b ${PERIODO * 0.75}s ease-in-out infinite}
 @keyframes b{0%,100%{transform:rotate(-4deg)}50%{transform:rotate(4deg)}}`;
 
-  const corpo = `<defs>
-<linearGradient id="lf" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${t.laje[0]}"/><stop offset="1" stop-color="${t.laje[1]}"/></linearGradient>
-<linearGradient id="ll" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${t.lajeLado[0]}"/><stop offset="1" stop-color="${t.lajeLado[1]}"/></linearGradient>
-</defs>
-<text x="48" y="88" class="g" font-size="38" font-weight="800" fill="${t.tinta}" letter-spacing="-.8">Mar de commits</text>
+  const corpo = `<text x="48" y="88" class="g" font-size="38" font-weight="800" fill="${t.tinta}" letter-spacing="-.8">Mar de commits</text>
 ${kpis}
 ${laje}
 ${grupos.join("\n")}
@@ -159,9 +155,9 @@ function barco3d(p, cx, cy, z0, t) {
   const vel = `M${pt(0, 0, z1 + vela)}L${pt(-0.8, 0, z1)}L${pt(0.8, 0, z1)}Z`;
   const dobra = `M${pt(0, 0, z1 + vela)}L${pt(0, 0, z1)}M${pt(0, 0, z1 + vela)}L${pt(-0.4, 0, z1)}`;
   return `<g stroke="${t.barcoLinha}" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round">
-<path d="${dentro}" fill="${misturar(t.azul, t.sombra, 0.45)}" stroke="none"/>
+<path d="${dentro}" fill="#b6cbff" stroke="none"/>
 <path d="${vel}" fill="${t.papel}"/>
 <path d="${dobra}" fill="none"/>
-<path d="${frente}" fill="${t.azul}" stroke="${t.azul}"/>
+<path d="${frente}" fill="#e4ecff"/>
 </g>`;
 }

@@ -9,22 +9,6 @@ const FONTES = `@font-face{font-family:G;src:url(data:font/woff2;base64,${fonte(
 @font-face{font-family:M;src:url(data:font/woff2;base64,${fonte("ibm-plex-mono-latin-500-normal.woff2")}) format("woff2");font-weight:500}`;
 const ICONES = JSON.parse(readFileSync(join(raiz, "icones/icones.json"), "utf8"));
 
-// Azul da Konecz sobre neutros; o mar vai da água parada (nível 0) à crista (nível 4).
-export const temas = {
-  claro: {
-    fundo: "#f6f8fb", borda: "#dde3ec", tinta: "#0b1220", texto: "#3a4356", sec: "#687387", fraco: "#a3acbb",
-    trilha: "#e6eaf1", azul: "#2465ff", azulClaro: "#7ea2ff", papel: "#ffffff", verde: "#1a7f37", vermelho: "#cf222e",
-    mar: ["#d9e4f8", "#b0c6fa", "#7d9ffc", "#4a7bfe", "#2465ff"], sombra: "#0a1c5c", barcoLinha: "#0b1220",
-    laje: ["#2f5ff0", "#0a1c5c"], lajeLado: ["#1d46c9", "#071341"], lajeTexto: "#dbe5ff",
-  },
-  escuro: {
-    fundo: "#0d1117", borda: "#262d38", tinta: "#f0f3f6", texto: "#c3cad5", sec: "#8b94a3", fraco: "#4f5868",
-    trilha: "#1b212b", azul: "#4d82ff", azulClaro: "#8fb0ff", papel: "#e9eefb", verde: "#3fb950", vermelho: "#f85149",
-    mar: ["#16243f", "#1c3874", "#2754bd", "#3d70f6", "#9ab8ff"], sombra: "#03060c", barcoLinha: "#0d1117",
-    laje: ["#1b3c9e", "#0a1640"], lajeLado: ["#132e80", "#060d2a"], lajeTexto: "#b7c8f5",
-  },
-};
-
 export const esc = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 export const num = (n) => n.toLocaleString("pt-BR");
 export const f = (n) => Math.round(n * 10) / 10;
@@ -37,6 +21,18 @@ export function misturar(a, b, p) {
   const c = (h, i) => parseInt(h.slice(1 + i * 2, 3 + i * 2), 16);
   return `#${[0, 1, 2].map((i) => Math.round(c(a, i) + (c(b, i) - c(a, i)) * p).toString(16).padStart(2, "0")).join("")}`;
 }
+
+// O azul do konecz.com de ponta a ponta (docs/design.md do site): fundo azul cheio, desenho e texto em branco,
+// detalhes em azul-claro, sem cor de estado. No tema escuro do GitHub o azul desce um tom, como no site.
+const azul = (fundo, cartao, barra) => ({
+  fundo, borda: barra, tinta: "#ffffff", texto: "#ffffff", sec: "#d6e2ff", fraco: "#7f9ff2",
+  cartao, trilha: barra, azul: "#ffffff", azulClaro: "#d6e2ff", papel: "#ffffff", escuro: "#0b1a4d",
+  // O mar vai do azul do cartão (nível 0) ao branco (a crista).
+  mar: [cartao, misturar(cartao, "#ffffff", 0.25), misturar(cartao, "#ffffff", 0.5), misturar(cartao, "#ffffff", 0.75), "#ffffff"],
+  sombra: "#0b1a4d", barcoLinha: fundo, laje: misturar(fundo, "#0b1a4d", 0.3), lajeLado: misturar(fundo, "#0b1a4d", 0.45),
+  lajeTexto: "#d6e2ff",
+});
+export const temas = { claro: azul("#1f56e0", "#2f63e6", "#4a78ee"), escuro: azul("#1748c4", "#2457d2", "#3c6ae0") };
 
 export function svg(w, h, t, corpo, css = "") {
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" role="img">
@@ -85,8 +81,12 @@ const LOGOS = {
 };
 export const logoDa = (linguagem) => (LOGOS[linguagem] ? { slug: LOGOS[linguagem], ...ICONES.logos[LOGOS[linguagem]] } : null);
 
-// Contorno do Brasil (Natural Earth) numa caixa de ~100 de altura, com a posição de Curitiba.
-export const BRASIL = ICONES.brasil;
+// A fita da Konecz (a logo, laço em 8 de listras finas), o desenho parado da abertura do site (public/fita/fita-0.svg).
+const fitaSvg = readFileSync(join(raiz, "icones/fita.svg"), "utf8");
+export const FITA = {
+  caixa: fitaSvg.match(/viewBox="([^"]+)"/)[1].split(" ").map(Number),
+  d: [...fitaSvg.matchAll(/ d="([^"]+)"/g)].map((m) => m[1]).join(""),
+};
 
 // O barquinho de papel da Konecz, em grade 24 (o mesmo desenho do site e do Vigia Pix).
 export function barco(x, y, s, { casco, vela, linha, traco = 1.8 }) {

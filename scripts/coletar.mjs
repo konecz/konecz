@@ -25,7 +25,7 @@ async function consultar(token, query, variables = {}) {
   }
 }
 
-const PERFIL = `query($login:String!, $integrados:String!, $abertos:String!, $fora:String!) {
+const PERFIL = `query($login:String!, $integrados:String!, $abertos:String!) {
   user(login:$login) {
     id
     contributionsCollection { contributionCalendar { totalContributions
@@ -38,13 +38,6 @@ const PERFIL = `query($login:String!, $integrados:String!, $abertos:String!, $fo
   }
   integrados: search(query:$integrados, type:ISSUE) { issueCount }
   abertos: search(query:$abertos, type:ISSUE) { issueCount }
-  fora: search(query:$fora, type:ISSUE, first:6) { nodes { __typename
-    ... on PullRequest { number title url state merged createdAt mergedAt closedAt reviewDecision additions deletions
-      reviews { totalCount } repository { ...repoDeFora } }
-    ... on Issue { number title url state createdAt closedAt repository { ...repoDeFora } } } }
-}
-fragment repoDeFora on Repository {
-  nameWithOwner stargazerCount forkCount owner { avatarUrl(size:112) }
 }`;
 
 const HISTORICO = `query($dono:String!, $nome:String!, $autor:ID!, $desde:GitTimestamp!, $depois:String) {
@@ -97,43 +90,11 @@ async function entregasPorDia(token, login) {
   return dias.map((dia) => ({ dia, n: contagem.get(dia) }));
 }
 
-// Avatar do dono do repositório, embutido como data: (o SVG dentro de <img> não carrega nada de fora).
-async function embutir(url) {
-  const resp = await fetch(url, { signal: AbortSignal.timeout(20_000) });
-  if (!resp.ok) return null;
-  const tipo = resp.headers.get("content-type") ?? "image/png";
-  return `data:${tipo};base64,${Buffer.from(await resp.arrayBuffer()).toString("base64")}`;
-}
-
-async function openSource(nos) {
-  const avatares = new Map();
-  for (const n of nos.filter((n) => n.repository)) {
-    const url = n.repository.owner.avatarUrl;
-    if (!avatares.has(url)) avatares.set(url, await embutir(url).catch(() => null));
-  }
-  return nos.filter((n) => n.repository).map((n) => ({
-    tipo: n.__typename === "PullRequest" ? "pr" : "issue",
-    repo: n.repository.nameWithOwner,
-    avatar: avatares.get(n.repository.owner.avatarUrl),
-    estrelas: n.repository.stargazerCount,
-    forks: n.repository.forkCount,
-    linhas: n.__typename === "PullRequest" ? { mais: n.additions, menos: n.deletions } : null,
-    numero: n.number,
-    titulo: n.title,
-    url: n.url,
-    estado: n.merged ? "integrado" : n.state === "OPEN" ? "aberto" : "fechado",
-    revisado: n.__typename === "PullRequest" && (n.reviews.totalCount > 0 || n.reviewDecision !== null),
-    criado: n.createdAt,
-    integrado: n.mergedAt ?? null,
-  }));
-}
-
 export async function coletar(token, login) {
   const p = await consultar(token, PERFIL, {
     login,
     integrados: `author:${login} is:pr is:merged`,
     abertos: `author:${login} is:pr is:open`,
-    fora: `author:${login} -user:${login} is:public sort:updated-desc`,
   });
   const usuario = p.user;
   const cal = usuario.contributionsCollection.contributionCalendar;
@@ -162,6 +123,5 @@ export async function coletar(token, login) {
     linguagens: [...bytes].sort((a, b) => b[1] - a[1]),
     commits,
     prs: { integrados: p.integrados.issueCount, abertos: p.abertos.issueCount, porDia },
-    openSource: await openSource(p.fora.nodes),
   };
 }
