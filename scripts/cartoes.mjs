@@ -1,48 +1,39 @@
-// Cabeçalho, linguagens, ritmo (horário dos commits e entregas) e tripulação, no azul do konecz.com.
+// Cabeçalho, linguagens, ritmo (horário dos commits e entregas) e tripulação, nas cores do GitHub com o azul do
+// konecz.com e o traço dele: a fita e o barco de papel em linhas finas, em 3D e em movimento.
 // Pouco texto de propósito: número, ícone e gráfico dizem o que cada coisa é.
-import { svg, esc, num, f, misturar, barco, icone, logoDa, FITA } from "./desenho.mjs";
+import { svg, esc, num, f, misturar, icone, logoDa } from "./desenho.mjs";
+import { fita, barco } from "./origami.mjs";
 
 const EQUIPE = [["Pedro Lahrs", "PL"], ["Vanessa Cristine", "VC"]];
 
-// Linha de onda que se repete a cada `per`, larga o bastante para deslizar um período sem emenda.
-function onda(x0, x1, y, amp, per) {
-  let d = `M${x0 - per} ${y}`;
-  for (let x = x0 - per; x < x1 + per; x += per) d += `q${per / 4} ${-amp} ${per / 2} 0t${per / 2} 0`;
-  return d;
-}
+// Entrada dos gráficos quando a imagem carrega: anel enchendo, barra subindo, fatia abrindo do centro.
+const ENTRADA = `.enche{animation:enche 1.8s cubic-bezier(.3,0,.2,1) both}
+@keyframes enche{from{stroke-dashoffset:var(--c)}}
+.sobe{transform-box:fill-box;transform-origin:50% 100%;animation:sobe 1.2s cubic-bezier(.3,0,.2,1) both}
+@keyframes sobe{from{transform:scaleY(0)}}
+.abre{transform-box:view-box;animation:abre 1.2s cubic-bezier(.3,0,.2,1) both}
+@keyframes abre{from{transform:scale(0)}}
+.flutua{animation:flutua 6s ease-in-out infinite}
+@keyframes flutua{0%,100%{transform:translateY(3px)}50%{transform:translateY(-3px)}}`;
 
-const ONDAS_CSS = `@keyframes d72{to{transform:translateX(-72px)}}
-@keyframes d110{to{transform:translateX(-110px)}}
-.balanca{transform-box:view-box;animation:balanca 6s ease-in-out infinite}
-@keyframes balanca{0%,100%{transform:translateY(2px) rotate(-2.5deg)}50%{transform:translateY(-3px) rotate(2.5deg)}}`;
-
-// A abertura do site: «Konecz AI Factory» e a fita da logo em linhas brancas finas, flutuando devagar.
+// A abertura do site: «Konecz AI Factory» e a fita da logo girando em 3D, em linhas azuis finas.
 export function cabecalho(t) {
-  const W = 1200, H = 300, ALTO = 236;
-  const [vx, vy, vw, vh] = FITA.caixa, s = ALTO / vh;
-  const x = W - 96 - vw * s, y = (H - ALTO) / 2;
-  const css = `.flutua{animation:flutua 9s ease-in-out infinite}
-@keyframes flutua{0%,100%{transform:translateY(5px)}50%{transform:translateY(-5px)}}`;
+  const W = 1200, H = 300;
   const corpo = `<text x="44" y="150" class="g" font-size="104" font-weight="800" fill="${t.tinta}" letter-spacing="-5">Konecz</text>
-<text x="48" y="222" class="g" font-size="56" font-weight="700" fill="${t.sec}" letter-spacing="-2">AI Factory</text>
-<g class="flutua"><path transform="translate(${f(x - vx * s)} ${f(y - vy * s)}) scale(${f(s * 1000) / 1000})" d="${FITA.d}" fill="none" stroke="${t.tinta}" stroke-width="${f(1.1 / s * 100) / 100}" stroke-linejoin="round" opacity=".92"/></g>`;
-  return svg(W, H, t, corpo, css);
+<text x="48" y="222" class="g" font-size="56" font-weight="700" fill="${t.azul}" letter-spacing="-2">AI Factory</text>
+${fita(1000, H / 2, 250, t.azul)}`;
+  return svg(W, H, t, corpo);
 }
 
 // Fatia que arredonda para 0,0% mas existe vira "<0,1%".
 const pct = (v) => (v > 0 && v < 0.05 ? "<0,1%" : `${v.toLocaleString("pt-BR", { minimumFractionDigits: 1, maximumFractionDigits: 1 })}%`);
 
-// Arco em volta da bolha, do topo em sentido horário, do tamanho da fatia.
-function arco(cx, cy, r, parte) {
-  const a = -Math.PI / 2 + Math.min(parte, 0.999) * 2 * Math.PI;
-  return `M${f(cx)} ${f(cy - r)}A${f(r)} ${f(r)} 0 ${parte > 0.5 ? 1 : 0} 1 ${f(cx + r * Math.cos(a))} ${f(cy + r * Math.sin(a))}`;
-}
-
-// Bolha com o logo em branco e o anel preenchido até a fatia da linguagem; sem logo, o nome escrito.
-// JS e TS têm as letras vazadas: o azul da bolha aparece nelas.
-function bolha(cx, cy, r, g, t) {
+// Bolha com o logo em azul e o anel que enche até a fatia da linguagem; sem logo, o nome escrito.
+// JS e TS têm as letras vazadas: o fundo da bolha aparece nelas.
+function bolha(cx, cy, r, g, t, atraso) {
+  const c = 2 * Math.PI * (r + 9), cheio = Math.max(0.001, Math.min(g.parte, 0.999)) * c;
   const anel = `<circle cx="${f(cx)}" cy="${f(cy)}" r="${f(r + 9)}" fill="none" stroke="${t.trilha}" stroke-width="5"/>
-<path d="${arco(cx, cy, r + 9, g.parte)}" fill="none" stroke="${t.tinta}" stroke-width="5" stroke-linecap="round"/>
+<circle class="enche" style="--c:${f(c)};animation-delay:${atraso}s" transform="rotate(-90 ${f(cx)} ${f(cy)})" cx="${f(cx)}" cy="${f(cy)}" r="${f(r + 9)}" fill="none" stroke="${t.azul}" stroke-width="5" stroke-linecap="round" stroke-dasharray="${f(c)} ${f(c)}" stroke-dashoffset="${f(c - cheio)}"/>
 <circle cx="${f(cx)}" cy="${f(cy)}" r="${f(r)}" fill="${t.cartao}"/>`;
   if (!g.logo) {
     // Nome inteiro se couber com 15 px ou mais; senão, as duas primeiras letras.
@@ -50,11 +41,11 @@ function bolha(cx, cy, r, g, t) {
     const texto = cabe >= 15 ? g.nome : g.nome.slice(0, 2);
     const tam = Math.min(26, cabe >= 15 ? cabe : (r * 1.6) / (texto.length * 0.62));
     return `${anel}
-<text x="${f(cx)}" y="${f(cy + tam * 0.36)}" text-anchor="middle" class="g" font-size="${f(tam)}" font-weight="800" fill="${t.tinta}">${esc(texto)}</text>`;
+<text x="${f(cx)}" y="${f(cy + tam * 0.36)}" text-anchor="middle" class="g" font-size="${f(tam)}" font-weight="800" fill="${t.azul}">${esc(texto)}</text>`;
   }
   const lado = r * 1.04, x = cx - lado / 2, y = cy - lado / 2;
   return `${anel}
-<path transform="translate(${f(x)} ${f(y)}) scale(${Math.round((lado / 24) * 1000) / 1000})" d="${g.logo.d}" fill="${t.tinta}"/>`;
+<path transform="translate(${f(x)} ${f(y)}) scale(${Math.round((lado / 24) * 1000) / 1000})" d="${g.logo.d}" fill="${t.azul}"/>`;
 }
 
 // Linguagens agrupadas pelo logo (Go e Go Template viram uma), da maior para a menor, com a fatia de cada.
@@ -80,13 +71,15 @@ export function linguagens(t, d) {
   const desenho = lista.map((g, i) => {
     const linha = Math.floor(i / POR_LINHA), naLinha = Math.min(POR_LINHA, lista.length - linha * POR_LINHA);
     const cx = (W - passo * naLinha) / 2 + (i % POR_LINHA) * passo + passo / 2, cy = TOPO + linha * LINHA + R + 9;
-    return `${bolha(cx, cy, R, g, t)}
+    return `<g class="flutua" style="animation-duration:${(5.5 + (i % 3) * 0.9).toFixed(1)}s;animation-delay:-${(i * 1.3).toFixed(1)}s">
+${bolha(cx, cy, R, g, t, f(0.15 + i * 0.06))}
+</g>
 <text x="${f(cx)}" y="${f(cy + R + 46)}" text-anchor="middle" class="m" font-size="17" fill="${t.sec}">${esc(pct(g.parte * 100))}</text>`;
   }).join("\n");
   const corpo = `${icone("repo", 48, 44, 24, t.sec)}<text x="82" y="64" class="m" font-size="20" fill="${t.tinta}">${num(d.repositorios)}</text>
 ${icone("code", 140, 44, 24, t.sec)}<text x="174" y="64" class="m" font-size="20" fill="${t.tinta}">${num(lista.length)}</text>
 ${desenho}`;
-  return svg(W, H, t, corpo);
+  return svg(W, H, t, corpo, ENTRADA);
 }
 
 function setor(cx, cy, r0, r1, a0, a1) {
@@ -107,7 +100,7 @@ function relogio(t, d) {
     const a = h * passo - Math.PI / 2;
     const r = r0 + 4 + (r1 - r0 - 4) * Math.sqrt(n / maior);
     const cor = h === pico ? t.azul : misturar(t.azulClaro, t.fundo, 0.55 - 0.45 * (n / maior));
-    return `<path d="${setor(cx, cy, r0 + 4, r, a + folga, a + passo - folga)}" fill="${cor}"/>`;
+    return `<path class="abre" style="transform-origin:${cx}px ${cy}px;animation-delay:${f(0.2 + h * 0.04)}s" d="${setor(cx, cy, r0 + 4, r, a + folga, a + passo - folga)}" fill="${cor}"/>`;
   }).join("");
   const marcas = [[0, "0h"], [6, "6h"], [12, "12h"], [18, "18h"]].map(([h, txt]) => {
     const a = h * passo - Math.PI / 2, r = r1 + 24;
@@ -117,6 +110,7 @@ function relogio(t, d) {
 <circle cx="${cx}" cy="${cy}" r="${r1}" fill="none" stroke="${t.trilha}" stroke-width="1.5" stroke-dasharray="2 5"/>
 <circle cx="${cx}" cy="${cy}" r="${r0}" fill="none" stroke="${t.trilha}" stroke-width="1.5"/>
 ${fatias}
+<g class="gira" style="transform-origin:${cx}px ${cy}px"><line x1="${cx}" y1="${cy - r0 - 2}" x2="${cx}" y2="${cy - r1 - 8}" stroke="${t.azul}" stroke-width="2" stroke-linecap="round"/><circle cx="${cx}" cy="${cy - r1 - 8}" r="4" fill="${t.azul}"/></g>
 ${marcas}
 ${icone("clock", cx - 9, cy - 30, 18, t.sec)}
 <text x="${cx}" y="${cy + 18}" text-anchor="middle" class="g" font-size="26" font-weight="800" fill="${t.tinta}">${pico}h</text>`;
@@ -132,8 +126,8 @@ function entregas(t, d) {
     const hoje = i === dias.length - 1;
     const bx = x0 + i * passo + 2;
     if (!h) return `<rect x="${f(bx)}" y="${base - 2}" width="${f(larg)}" height="2" rx="1" fill="${t.trilha}"/>`;
-    return `<rect x="${f(bx)}" y="${f(base - h)}" width="${f(larg)}" height="${f(h)}" rx="2.5" fill="${hoje ? t.azul : misturar(t.azulClaro, t.fundo, 0.25)}"/>`
-      + (hoje ? `<text x="${f(bx + larg / 2)}" y="${f(base - h - 10)}" text-anchor="middle" class="m" font-size="16" fill="${t.azul}">${num(c.n)}</text>` : "");
+    return `<rect class="sobe" style="animation-delay:${f(0.3 + i * 0.035)}s" x="${f(bx)}" y="${f(base - h)}" width="${f(larg)}" height="${f(h)}" rx="2.5" fill="${hoje ? t.azul : misturar(t.azulClaro, t.fundo, 0.25)}"/>`
+      + (hoje ? `<text x="${f(bx + larg / 2)}" y="${f(base - h - 10)}" text-anchor="middle" class="m vivo" font-size="16" fill="${t.azul}">${num(c.n)}</text>` : "");
   }).join("");
   const marcas = dias.map((c, i) => new Date(`${c.dia}T12:00:00Z`).getUTCDay() !== 1 ? "" :
     `<text x="${f(x0 + i * passo + passo / 2)}" y="${base + 28}" text-anchor="middle" class="m" font-size="15" fill="${t.sec}">${c.dia.slice(8, 10)}/${c.dia.slice(5, 7)}</text>`).join("");
@@ -149,26 +143,19 @@ export function ritmo(t, d) {
   const W = 1200, H = 380;
   return svg(W, H, t, `${relogio(t, d)}
 <line x1="600" y1="48" x2="600" y2="${H - 48}" stroke="${t.borda}" stroke-width="1.5"/>
-${entregas(t, d)}`);
+${entregas(t, d)}`, `${ENTRADA}
+.gira{transform-box:view-box;animation:gira 24s linear infinite}
+@keyframes gira{to{transform:rotate(360deg)}}`);
 }
 
-// Quem toca a Konecz: cada um no seu barco, com as iniciais pintadas no casco.
+// Quem toca a Konecz: cada um no seu barco de papel, no traço do site, navegando no seu pedaço de mar.
 export function tripulacao(t) {
-  const W = 1200, H = 244, NIVEL = 194, S = 5;
-  const barcos = EQUIPE.map(([nome, iniciais], i) => {
-    const x = 60 + i * 560, centro = x + 12 * S;
-    const casco = t.papel, letra = t.fundo;
-    return `<g class="balanca" style="transform-origin:${centro}px ${NIVEL}px;animation-duration:${6 + i * 1.3}s;animation-delay:-${i * 2}s">
-${barco(x, NIVEL - 19 * S, S, { casco, vela: t.papel, linha: t.fundo, traco: 2.4 })}
-<text x="${centro}" y="${NIVEL - 5}" text-anchor="middle" class="g" font-size="17" font-weight="800" fill="${letra}" letter-spacing="1">${iniciais}</text>
-</g>
-<text x="${x + 136}" y="${NIVEL - 30}" class="g" font-size="32" font-weight="800" fill="${t.tinta}" letter-spacing="-.5">${esc(nome)}</text>`;
+  const W = 1200, H = 300;
+  const barcos = EQUIPE.map(([nome], i) => {
+    const cx = 200 + i * 540, cy = 178;
+    return `${barco(cx, cy, 92, { cor: t.azul, fundo: t.fundo, atraso: i * 0.37, giro0: i ? -0.35 : 0.35 })}
+<text x="${cx + 130}" y="${cy + 12}" class="g" font-size="32" font-weight="800" fill="${t.tinta}" letter-spacing="-.5">${esc(nome)}</text>`;
   }).join("\n");
-  const agua = `<clipPath id="moldura"><rect x="1" y="1" width="${W - 2}" height="${H - 2}" rx="15"/></clipPath>
-<g clip-path="url(#moldura)">
-<path style="animation:d72 8s linear infinite" d="${onda(0, W, NIVEL + 2, 7, 72)}" fill="none" stroke="${t.tinta}" stroke-width="2.4" stroke-linecap="round"/>
-<path style="animation:d110 14s linear infinite" d="${onda(0, W, NIVEL + 28, 5, 110)}" fill="none" stroke="${t.fraco}" stroke-width="2" stroke-linecap="round"/>
-</g>`;
   const cabeca = `${icone("people", 48, 44, 24, t.sec)}<text x="82" y="64" class="m" font-size="20" fill="${t.tinta}">${EQUIPE.length}</text>`;
-  return svg(W, H, t, `${cabeca}\n${agua}\n${barcos}`, ONDAS_CSS);
+  return svg(W, H, t, `${cabeca}\n${barcos}`);
 }

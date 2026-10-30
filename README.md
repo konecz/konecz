@@ -1,30 +1,30 @@
 <a href="https://konecz.com">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/konecz/konecz/output/cabecalho-escuro.svg?v=azul1">
-    <img alt="Konecz, AI Factory." src="https://raw.githubusercontent.com/konecz/konecz/output/cabecalho-claro.svg?v=azul1" width="100%">
+    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/konecz/konecz/output/cabecalho-escuro.svg?v=origami1">
+    <img alt="Konecz, AI Factory, com a fita da logo girando em 3D." src="https://raw.githubusercontent.com/konecz/konecz/output/cabecalho-claro.svg?v=origami1" width="100%">
   </picture>
 </a>
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/konecz/konecz/output/mar-escuro.svg?v=azul1">
-  <img alt="Mar de commits: as contribuições do último ano no GitHub em 3D, um dia por coluna, com o barquinho de papel no dia de hoje." src="https://raw.githubusercontent.com/konecz/konecz/output/mar-claro.svg?v=azul1" width="100%">
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/konecz/konecz/output/mar-escuro.svg?v=origami1">
+  <img alt="Mar de commits: as contribuições do último ano no GitHub em 3D, um dia por coluna, com o barquinho de papel no dia de hoje." src="https://raw.githubusercontent.com/konecz/konecz/output/mar-claro.svg?v=origami1" width="100%">
 </picture>
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/konecz/konecz/output/linguagens-escuro.svg?v=azul1">
-  <img alt="Linguagens dos repositórios da Konecz, todas do mesmo tamanho, com o anel de cada uma cheio até a sua fatia do código." src="https://raw.githubusercontent.com/konecz/konecz/output/linguagens-claro.svg?v=azul1" width="100%">
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/konecz/konecz/output/linguagens-escuro.svg?v=origami1">
+  <img alt="Linguagens dos repositórios da Konecz, todas do mesmo tamanho, com o anel de cada uma cheio até a sua fatia do código." src="https://raw.githubusercontent.com/konecz/konecz/output/linguagens-claro.svg?v=origami1" width="100%">
 </picture>
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/konecz/konecz/output/ritmo-escuro.svg?v=azul1">
-  <img alt="Ritmo: os commits por hora do dia num relógio de 24 horas e os PRs integrados por dia." src="https://raw.githubusercontent.com/konecz/konecz/output/ritmo-claro.svg?v=azul1" width="100%">
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/konecz/konecz/output/ritmo-escuro.svg?v=origami1">
+  <img alt="Ritmo: os commits por hora do dia num relógio de 24 horas e os PRs integrados por dia." src="https://raw.githubusercontent.com/konecz/konecz/output/ritmo-claro.svg?v=origami1" width="100%">
 </picture>
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/konecz/konecz/output/tripulacao-escuro.svg?v=azul1">
-  <img alt="Tripulação: Pedro Lahrs e Vanessa Cristine." src="https://raw.githubusercontent.com/konecz/konecz/output/tripulacao-claro.svg?v=azul1" width="100%">
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/konecz/konecz/output/tripulacao-escuro.svg?v=origami1">
+  <img alt="Tripulação: Pedro Lahrs e Vanessa Cristine, cada um num barco de papel navegando." src="https://raw.githubusercontent.com/konecz/konecz/output/tripulacao-claro.svg?v=origami1" width="100%">
 </picture>
 
 <p align="center"><a href="https://konecz.com"><b>konecz.com</b></a></p>
 
-<!-- Cartões gerados por scripts/gerar.mjs com os números da API do GitHub, refeitos a cada 15 min e publicados no branch output. Fontes: Schibsted Grotesk e IBM Plex Mono (OFL, em fontes/). Logos: Simple Icons (CC0); ícones: Octicons (MIT); fita: a logo da Konecz, do konecz.com; tudo em icones/. -->
+<!-- Cartões gerados por scripts/gerar.mjs com os números da API do GitHub, refeitos a cada 15 min e publicados no branch output. Fontes: Schibsted Grotesk e IBM Plex Mono (OFL, em fontes/). Logos: Simple Icons (CC0); ícones: Octicons (MIT), em icones/; a fita e o barco de papel vêm do konecz.com (scripts/origami.mjs). -->

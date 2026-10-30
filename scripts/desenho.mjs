@@ -1,4 +1,4 @@
-// Peças comuns dos cartões: temas, moldura do SVG, fontes e ícones embutidos, barquinho e formatação.
+// Peças comuns dos cartões: temas, moldura do SVG, fontes e ícones embutidos e formatação.
 import { readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -22,17 +22,18 @@ export function misturar(a, b, p) {
   return `#${[0, 1, 2].map((i) => Math.round(c(a, i) + (c(b, i) - c(a, i)) * p).toString(16).padStart(2, "0")).join("")}`;
 }
 
-// O azul do konecz.com de ponta a ponta (docs/design.md do site): fundo azul cheio, desenho e texto em branco,
-// detalhes em azul-claro, sem cor de estado. No tema escuro do GitHub o azul desce um tom, como no site.
-const azul = (fundo, cartao, barra) => ({
-  fundo, borda: barra, tinta: "#ffffff", texto: "#ffffff", sec: "#d6e2ff", fraco: "#7f9ff2",
-  cartao, trilha: barra, azul: "#ffffff", azulClaro: "#d6e2ff", papel: "#ffffff", escuro: "#0b1a4d",
-  // O mar vai do azul do cartão (nível 0) ao branco (a crista).
-  mar: [cartao, misturar(cartao, "#ffffff", 0.25), misturar(cartao, "#ffffff", 0.5), misturar(cartao, "#ffffff", 0.75), "#ffffff"],
-  sombra: "#0b1a4d", barcoLinha: fundo, laje: misturar(fundo, "#0b1a4d", 0.3), lajeLado: misturar(fundo, "#0b1a4d", 0.45),
-  lajeTexto: "#d6e2ff",
+// As cores do próprio GitHub (o cartão some no README) com o azul do konecz.com de acento, como as linhas brancas
+// sobre o azul no site: desenho em linhas finas azuis, texto nos neutros do GitHub, sem cor de estado nem gradiente.
+const tema = (fundo, cartao, trilha, borda, tinta, sec, fraco, azul, azulClaro) => ({
+  fundo, cartao, trilha, borda, tinta, texto: tinta, sec, fraco, azul, azulClaro,
+  // O mar vai do cinza do GitHub (nível 0) ao azul cheio (a crista).
+  mar: [trilha, misturar(trilha, azul, 0.3), misturar(trilha, azul, 0.55), misturar(trilha, azul, 0.78), azul],
+  sombra: misturar(fundo, "#000000", 0.6), laje: azul, lajeLado: misturar(azul, "#000000", 0.3), lajeTexto: "#ffffff",
 });
-export const temas = { claro: azul("#1f56e0", "#2f63e6", "#4a78ee"), escuro: azul("#1748c4", "#2457d2", "#3c6ae0") };
+export const temas = {
+  claro: tema("#ffffff", "#f6f8fa", "#eff2f5", "#d1d9e0", "#1f2328", "#59636e", "#818b98", "#1f56e0", "#7ea2ff"),
+  escuro: tema("#0d1117", "#151b23", "#212830", "#3d444d", "#f0f6fc", "#9198a1", "#656c76", "#4d82ff", "#8fb0ff"),
+};
 
 export function svg(w, h, t, corpo, css = "") {
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" role="img">
@@ -80,20 +81,3 @@ const LOGOS = {
   Vala: "vala",
 };
 export const logoDa = (linguagem) => (LOGOS[linguagem] ? { slug: LOGOS[linguagem], ...ICONES.logos[LOGOS[linguagem]] } : null);
-
-// A fita da Konecz (a logo, laço em 8 de listras finas), o desenho parado da abertura do site (public/fita/fita-0.svg).
-const fitaSvg = readFileSync(join(raiz, "icones/fita.svg"), "utf8");
-export const FITA = {
-  caixa: fitaSvg.match(/viewBox="([^"]+)"/)[1].split(" ").map(Number),
-  d: [...fitaSvg.matchAll(/ d="([^"]+)"/g)].map((m) => m[1]).join(""),
-};
-
-// O barquinho de papel da Konecz, em grade 24 (o mesmo desenho do site e do Vigia Pix).
-export function barco(x, y, s, { casco, vela, linha, traco = 1.8 }) {
-  const sw = f(traco / s * 100) / 100;
-  return `<g transform="translate(${f(x)} ${f(y)}) scale(${s})" stroke-linejoin="round" stroke-linecap="round">
-<path d="M2.5 14.5h19l-3.2 4.5H5.7z" fill="${casco}" stroke="${casco}" stroke-width="${sw}"/>
-<path d="M12 3.5 6 14.5h12z" fill="${vela}" stroke="${linha}" stroke-width="${sw}"/>
-<path d="M12 3.5v11M12 3.5 9 14.5" fill="none" stroke="${linha}" stroke-width="${sw}"/>
-</g>`;
-}

@@ -2,6 +2,7 @@
 // Cada dia é uma coluna, e a altura é o volume do dia. A onda é CSS: uma animação por diagonal da grade,
 // então o navegador move só ~60 grupos. A ordem de desenho (do fundo para a frente) vale com qualquer altura.
 import { svg, num, f, misturar, icone, mesCurto } from "./desenho.mjs";
+import { barco as barcoDePapel } from "./origami.mjs";
 
 const W = 1200;
 const AREA = { x: 48, y: 150, w: 1104, h: 330 }; // o mar ocupa a largura toda; a altura do cartão sai dele
@@ -78,8 +79,8 @@ export function mar(t, d) {
   // O dia recorde ganha um troféu flutuando em cima da coluna.
   const xh = nx - 1, yh = semanas[xh].findLastIndex(Boolean);
   const nHoje = semanas[xh][yh].n;
-  const barco = barco3d(p, xh + 0.5, yh + 0.5, altura(nHoje), t);
   const [rx, ry] = p(xh + 0.5, yh + 0.5, altura(nHoje));
+  const barco = barcoDePapel(rx, ry - 0.5 * 26, 26, { cor: t.azul, fundo: t.fundo, quadros: 1, mar: false, giro0: 0.5, traco: 1.2 });
   const [lx, ly] = p(xh + 0.5, yh + 0.5, altura(nHoje) + 3.2);
   const marcaHoje = `<g class="o" style="animation-delay:${atraso(xh + yh)}s">
 <g class="b" style="transform-origin:${f(rx)}px ${f(ry)}px">${barco}</g>
@@ -143,21 +144,4 @@ function numeros(semanas) {
     recorde: dias.reduce((a, b) => (b.n > a.n ? b : a)),
     semana: { soma: ultimos.reduce((s, n) => s + n, 0), dias: ultimos },
   };
-}
-
-// Barquinho de papel em 3D: casco em V (painel da frente, borda de dentro) e a vela no plano do meio.
-function barco3d(p, cx, cy, z0, t) {
-  const L = 1.5, l = 0.9, alto = 0.7, meia = 0.24, vela = 1.9;
-  const z1 = z0 + alto;
-  const pt = (x, y, z) => p(cx + x, cy + y, z).map(f).join(" ");
-  const dentro = `M${pt(-L, -meia, z1)}L${pt(L, -meia, z1)}L${pt(l, 0, z0 + 0.04)}L${pt(-l, 0, z0 + 0.04)}Z`;
-  const frente = `M${pt(-L, meia, z1)}L${pt(L, meia, z1)}L${pt(l, 0, z0 + 0.04)}L${pt(-l, 0, z0 + 0.04)}Z`;
-  const vel = `M${pt(0, 0, z1 + vela)}L${pt(-0.8, 0, z1)}L${pt(0.8, 0, z1)}Z`;
-  const dobra = `M${pt(0, 0, z1 + vela)}L${pt(0, 0, z1)}M${pt(0, 0, z1 + vela)}L${pt(-0.4, 0, z1)}`;
-  return `<g stroke="${t.barcoLinha}" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round">
-<path d="${dentro}" fill="#b6cbff" stroke="none"/>
-<path d="${vel}" fill="${t.papel}"/>
-<path d="${dobra}" fill="none"/>
-<path d="${frente}" fill="#e4ecff"/>
-</g>`;
 }
