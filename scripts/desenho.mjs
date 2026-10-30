@@ -13,8 +13,6 @@ export const esc = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;")
 export const num = (n) => n.toLocaleString("pt-BR");
 export const f = (n) => Math.round(n * 10) / 10;
 
-const MESES = ["jan", "fev", "mar", "abr", "mai", "jun", "jul", "ago", "set", "out", "nov", "dez"];
-export const mesCurto = (dia) => MESES[Number(dia.slice(5, 7)) - 1];
 
 // Mistura duas cores #rrggbb (p = 0 fica a primeira, p = 1 a segunda).
 export function misturar(a, b, p) {

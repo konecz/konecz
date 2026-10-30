@@ -3,7 +3,9 @@
 // volume do dia. As linhas da frente pintam o fundo embaixo de si e cobrem as de trás, como a água da frente cobre o
 // casco no site. O balanço é CSS, uma animação por linha com o atraso andando de trás para a frente: a ondulação
 // vem chegando. O barco de papel navega no dia de hoje, junto com a linha dele.
-import { svg, num, f, icone, mesCurto } from "./desenho.mjs";
+import { svg, num, f, icone } from "./desenho.mjs";
+
+const inicial = (dia) => "JFMAMJJASOND"[Number(dia.slice(5, 7)) - 1];
 import { barco as barcoDePapel } from "./origami.mjs";
 
 const W = 1200;
@@ -69,18 +71,29 @@ export function mar(t, d) {
   linhas[r.recorde.y * POR_DIA].desenho += icone("trophy", tx - 12, ty - 26, 24, t.tinta);
   const ondas = linhas.map((l) => `<g class="o" style="animation-delay:${atraso(l.k)}s">${l.desenho}</g>`).join("\n");
 
-  // Meses embaixo da linha da frente, deitados no plano dela.
-  const inicios = semanas.map((s, x) => [x, s.find((c) => c?.data.endsWith("-01"))]).filter(([, c]) => c);
-  if (!inicios.length || inicios[0][0] >= 3) inicios.unshift([0, semanas[0].find(Boolean)]);
-  const meses = inicios.map(([x, dia]) => {
-    const [ax, ay] = p(x, ny - 1, fundo);
-    return `<text transform="matrix(${f(cg * 1000) / 1000} ${f(sg * se * 1000) / 1000} 0 1 ${f(ax)} ${f(ay + 22)})" class="m" font-size="15" letter-spacing="1" fill="${t.sec}">${mesCurto(dia.data)}</text>`;
+  // Meses: um anel por mês embaixo da linha da frente, no meio do mês, cheio até as contribuições dele (o mês mais
+  // forte enche o anel), com a inicial dentro; enche quando a imagem carrega, como os das linguagens.
+  const porMes = new Map();
+  semanas.forEach((s, x) => s.forEach((c, y) => {
+    if (!c) return;
+    const m = porMes.get(c.data.slice(0, 7)) ?? { soma: 0, xs: 0, dias: 0, data: c.data };
+    m.soma += c.n; m.xs += x; m.dias++;
+    porMes.set(c.data.slice(0, 7), m);
+  }));
+  const maiorMes = Math.max(1, ...[...porMes.values()].map((m) => m.soma));
+  const RM = 17, C = 2 * Math.PI * RM;
+  const meses = [...porMes.values()].filter((m) => m.dias >= 7).map((m, i) => {
+    const [mx, my] = p(m.xs / m.dias, ny - 1, fundo);
+    const cx = f(mx), cy = f(my + 34), cheio = Math.max(0.001, Math.min(m.soma / maiorMes, 0.999)) * C;
+    return `<circle cx="${cx}" cy="${cy}" r="${RM}" fill="none" stroke="${t.trilha}" stroke-width="4.5"/>
+<circle class="enche" style="--c:${f(C)};animation-delay:${f(0.3 + i * 0.07)}s" transform="rotate(-90 ${cx} ${cy})" cx="${cx}" cy="${cy}" r="${RM}" fill="none" stroke="${t.azul}" stroke-width="4.5" stroke-linecap="round" stroke-dasharray="${f(C)} ${f(C)}" stroke-dashoffset="${f(C - cheio)}"/>
+<text x="${cx}" y="${f(my + 40)}" text-anchor="middle" class="g" font-size="16" font-weight="800" fill="${t.sec}">${inicial(m.data)}</text>`;
   }).join("");
 
   // Os números ficam no canto de baixo à esquerda, que a diagonal do mar deixa livre; ícone no lugar de legenda.
   const [ax, ay] = p(0, ny - 1, fundo), [bx, by] = p(nx - 1, ny - 1, fundo);
-  const yNum = Math.ceil(ay + ((760 - ax) * (by - ay)) / (bx - ax) + 84);
-  const H = Math.ceil(Math.max(yNum + 48, by + 60));
+  const yNum = Math.ceil(ay + ((760 - ax) * (by - ay)) / (bx - ax) + 112);
+  const H = Math.ceil(Math.max(yNum + 48, by + 70));
   const maiorDaSemana = Math.max(...r.semana.dias, 1);
   const semana = r.semana.dias.map((n, i) => {
     const alto = Math.max(2, (n / maiorDaSemana) * 30);
@@ -103,7 +116,9 @@ export function mar(t, d) {
   const css = `.o{animation:o ${PERIODO}s ease-in-out infinite}
 @keyframes o{0%,100%{transform:translateY(${BALANCO}px)}50%{transform:translateY(-${BALANCO}px)}}
 .sobe{transform-box:fill-box;transform-origin:50% 100%;animation:sobe 1.2s cubic-bezier(.3,0,.2,1) both}
-@keyframes sobe{from{transform:scaleY(0)}}`;
+@keyframes sobe{from{transform:scaleY(0)}}
+.enche{animation:enche 1.8s cubic-bezier(.3,0,.2,1) both}
+@keyframes enche{from{stroke-dashoffset:var(--c)}}`;
   const corpo = `<text x="48" y="88" class="g" font-size="38" font-weight="800" fill="${t.tinta}" letter-spacing="-.8">Mar de commits</text>
 ${kpis}
 ${ondas}
