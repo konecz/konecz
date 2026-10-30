@@ -28,24 +28,28 @@ ${fita(1000, H / 2, 250, t.azul)}`;
 // Fatia que arredonda para 0,0% mas existe vira "<0,1%".
 const pct = (v) => (v > 0 && v < 0.05 ? "<0,1%" : `${v.toLocaleString("pt-BR", { minimumFractionDigits: 1, maximumFractionDigits: 1 })}%`);
 
-// Bolha com o logo em azul e o anel que enche até a fatia da linguagem; sem logo, o nome escrito.
+// Bolha com o logo em azul, a fatia em número dentro e o anel que enche até ela; sem logo, o nome escrito.
 // JS e TS têm as letras vazadas: o fundo da bolha aparece nelas.
 function bolha(cx, cy, r, g, t, atraso) {
   const c = 2 * Math.PI * (r + 9), cheio = Math.max(0.001, Math.min(g.parte, 0.999)) * c;
   const anel = `<circle cx="${f(cx)}" cy="${f(cy)}" r="${f(r + 9)}" fill="none" stroke="${t.trilha}" stroke-width="5"/>
 <circle class="enche" style="--c:${f(c)};animation-delay:${atraso}s" transform="rotate(-90 ${f(cx)} ${f(cy)})" cx="${f(cx)}" cy="${f(cy)}" r="${f(r + 9)}" fill="none" stroke="${t.azul}" stroke-width="5" stroke-linecap="round" stroke-dasharray="${f(c)} ${f(c)}" stroke-dashoffset="${f(c - cheio)}"/>
 <circle cx="${f(cx)}" cy="${f(cy)}" r="${f(r)}" fill="${t.cartao}"/>`;
+  // Dentro da bolha: o logo (ou o nome) em cima e a fatia embaixo; por fora, só o anel.
+  const fatia = `<text x="${f(cx)}" y="${f(cy + r * 0.62)}" text-anchor="middle" class="m" font-size="15" fill="${t.tinta}">${esc(pct(g.parte * 100))}</text>`;
   if (!g.logo) {
     // Nome inteiro se couber com 15 px ou mais; senão, as duas primeiras letras.
-    const cabe = (r * 1.6) / (g.nome.length * 0.62);
+    const cabe = (r * 1.5) / (g.nome.length * 0.62);
     const texto = cabe >= 15 ? g.nome : g.nome.slice(0, 2);
-    const tam = Math.min(26, cabe >= 15 ? cabe : (r * 1.6) / (texto.length * 0.62));
+    const tam = Math.min(22, cabe >= 15 ? cabe : (r * 1.5) / (texto.length * 0.62));
     return `${anel}
-<text x="${f(cx)}" y="${f(cy + tam * 0.36)}" text-anchor="middle" class="g" font-size="${f(tam)}" font-weight="800" fill="${t.azul}">${esc(texto)}</text>`;
+<text x="${f(cx)}" y="${f(cy - r * 0.12 + tam * 0.36)}" text-anchor="middle" class="g" font-size="${f(tam)}" font-weight="800" fill="${t.azul}">${esc(texto)}</text>
+${fatia}`;
   }
-  const lado = r * 1.04, x = cx - lado / 2, y = cy - lado / 2;
+  const lado = r * 0.82, x = cx - lado / 2, y = cy - r * 0.18 - lado / 2;
   return `${anel}
-<path transform="translate(${f(x)} ${f(y)}) scale(${Math.round((lado / 24) * 1000) / 1000})" d="${g.logo.d}" fill="${t.azul}"/>`;
+<path transform="translate(${f(x)} ${f(y)}) scale(${Math.round((lado / 24) * 1000) / 1000})" d="${g.logo.d}" fill="${t.azul}"/>
+${fatia}`;
 }
 
 // Linguagens agrupadas pelo logo (Go e Go Template viram uma), da maior para a menor, com a fatia de cada.
@@ -66,15 +70,14 @@ function gruposDeLinguagens(d) {
 // Até 8 por linha, da maior para a menor; a última linha fica centralizada.
 export function linguagens(t, d) {
   const lista = gruposDeLinguagens(d);
-  const W = 1200, R = 38, POR_LINHA = 8, passo = 138, LINHA = 176, TOPO = 108;
+  const W = 1200, R = 46, POR_LINHA = 8, passo = 138, LINHA = 142, TOPO = 104;
   const linhas = Math.max(1, Math.ceil(lista.length / POR_LINHA)), H = TOPO + linhas * LINHA - 10;
   const desenho = lista.map((g, i) => {
     const linha = Math.floor(i / POR_LINHA), naLinha = Math.min(POR_LINHA, lista.length - linha * POR_LINHA);
     const cx = (W - passo * naLinha) / 2 + (i % POR_LINHA) * passo + passo / 2, cy = TOPO + linha * LINHA + R + 9;
     return `<g class="flutua" style="animation-duration:${(5.5 + (i % 3) * 0.9).toFixed(1)}s;animation-delay:-${(i * 1.3).toFixed(1)}s">
 ${bolha(cx, cy, R, g, t, f(0.15 + i * 0.06))}
-</g>
-<text x="${f(cx)}" y="${f(cy + R + 46)}" text-anchor="middle" class="m" font-size="17" fill="${t.sec}">${esc(pct(g.parte * 100))}</text>`;
+</g>`;
   }).join("\n");
   const corpo = `${icone("repo", 48, 44, 24, t.sec)}<text x="82" y="64" class="m" font-size="20" fill="${t.tinta}">${num(d.repositorios)}</text>
 ${icone("code", 140, 44, 24, t.sec)}<text x="174" y="64" class="m" font-size="20" fill="${t.tinta}">${num(lista.length)}</text>

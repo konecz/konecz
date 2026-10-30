@@ -1,28 +1,28 @@
 <a href="https://konecz.com">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/konecz/konecz/output/cabecalho-escuro.svg?v=meses4">
-    <img alt="Konecz, AI Factory, com a fita da logo girando em 3D." src="https://raw.githubusercontent.com/konecz/konecz/output/cabecalho-claro.svg?v=meses4" width="100%">
+    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/konecz/konecz/output/cabecalho-escuro.svg?v=ling5">
+    <img alt="Konecz, AI Factory, com a fita da logo girando em 3D." src="https://raw.githubusercontent.com/konecz/konecz/output/cabecalho-claro.svg?v=ling5" width="100%">
   </picture>
 </a>
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/konecz/konecz/output/mar-escuro.svg?v=meses4">
-  <img alt="Mar de commits: as contribuições do último ano no GitHub como um mar de linhas em 3D que ondula, com o barco de papel navegando no dia de hoje." src="https://raw.githubusercontent.com/konecz/konecz/output/mar-claro.svg?v=meses4" width="100%">
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/konecz/konecz/output/mar-escuro.svg?v=ling5">
+  <img alt="Mar de commits: as contribuições do último ano no GitHub como um mar de linhas em 3D que ondula, com o barco de papel navegando no dia de hoje." src="https://raw.githubusercontent.com/konecz/konecz/output/mar-claro.svg?v=ling5" width="100%">
 </picture>
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/konecz/konecz/output/linguagens-escuro.svg?v=meses4">
-  <img alt="Linguagens dos repositórios da Konecz, todas do mesmo tamanho, com o anel de cada uma cheio até a sua fatia do código." src="https://raw.githubusercontent.com/konecz/konecz/output/linguagens-claro.svg?v=meses4" width="100%">
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/konecz/konecz/output/linguagens-escuro.svg?v=ling5">
+  <img alt="Linguagens dos repositórios da Konecz, todas do mesmo tamanho, com o anel de cada uma cheio até a sua fatia do código." src="https://raw.githubusercontent.com/konecz/konecz/output/linguagens-claro.svg?v=ling5" width="100%">
 </picture>
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/konecz/konecz/output/ritmo-escuro.svg?v=meses4">
-  <img alt="Ritmo: os commits por hora do dia num relógio de 24 horas e os PRs integrados por dia." src="https://raw.githubusercontent.com/konecz/konecz/output/ritmo-claro.svg?v=meses4" width="100%">
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/konecz/konecz/output/ritmo-escuro.svg?v=ling5">
+  <img alt="Ritmo: os commits por hora do dia num relógio de 24 horas e os PRs integrados por dia." src="https://raw.githubusercontent.com/konecz/konecz/output/ritmo-claro.svg?v=ling5" width="100%">
 </picture>
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/konecz/konecz/output/tripulacao-escuro.svg?v=meses4">
-  <img alt="Tripulação: Pedro Lahrs e Vanessa Cristine, cada um num barco de papel navegando." src="https://raw.githubusercontent.com/konecz/konecz/output/tripulacao-claro.svg?v=meses4" width="100%">
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/konecz/konecz/output/tripulacao-escuro.svg?v=ling5">
+  <img alt="Tripulação: Pedro Lahrs e Vanessa Cristine, cada um num barco de papel navegando." src="https://raw.githubusercontent.com/konecz/konecz/output/tripulacao-claro.svg?v=ling5" width="100%">
 </picture>
 
 <p align="center"><a href="https://konecz.com"><b>konecz.com</b></a></p>
