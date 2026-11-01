@@ -33,11 +33,6 @@ and review the code, while people decide what to build and sign off every releas
 </picture>
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/konecz/konecz/output/ritmo-escuro.svg?v=ling5">
-  <img alt="Ritmo de desenvolvimento da Konecz: commits por hora do dia num relógio de 24 horas e pull requests integrados por dia. / Konecz development rhythm: commits by hour and merged pull requests per day." src="https://raw.githubusercontent.com/konecz/konecz/output/ritmo-claro.svg?v=ling5" width="100%">
-</picture>
-
-<picture>
   <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/konecz/konecz/output/tripulacao-escuro.svg?v=ling5">
   <img alt="Tripulação da Konecz: Pedro Henrique Lahr e Vanessa Cristine, fundadores, cada um num barco de papel navegando. / Konecz crew: founders Pedro Henrique Lahr and Vanessa Cristine." src="https://raw.githubusercontent.com/konecz/konecz/output/tripulacao-claro.svg?v=ling5" width="100%">
 </picture>
