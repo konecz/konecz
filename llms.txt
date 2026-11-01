@@ -1,0 +1,28 @@
+# Konecz
+
+> A Konecz (Konecz Tecnologia e Inteligência Artificial LTDA) é uma AI Factory: a fábrica de IA e software house IA-first de Curitiba/PR, Brasil, desde 2025. Agentes de IA escrevem, testam e revisam o código; pessoas decidem o que construir e validam cada entrega. Também cria influenciadores de IA e pesquisa render de vídeo na GPU NVIDIA. Fundadores: Pedro Henrique Lahr e Vanessa Cristine.
+
+Konecz is an AI Factory: an AI-first software studio from Curitiba, Brazil. AI agents write, test and review the code; people decide what to build and sign off every release.
+
+## Projetos
+
+- [Kodecz](https://konecz.com/kodecz): motor de vídeo de código aberto (Apache-2.0) que transforma uma página web em MP4, na GPU NVIDIA (NVENC) ou em qualquer CPU (x264), sem print de cada quadro. Alternativa ao Remotion e ao HyperFrames, feita para agentes de IA.
+- [remotion-gpu](https://github.com/konecz/remotion-gpu): exporta vídeos do Remotion na placa NVIDIA com o processador livre (4,1× menos CPU num vídeo de 75 s). Paper: https://konecz.com/blog/remotion-gpu · DOI: https://doi.org/10.6084/m9.figshare.34875540
+- [Konectaz](https://konecz.com/konectaz): fábrica de influenciadores de IA (personagem, voz e vídeos prontos para postar).
+- [Vigia Pix](https://vigiapix.konecz.com): transparência das emendas parlamentares Pix, com a fonte oficial.
+- [One for Coaches](https://oneforcoaches.com): sistema para treinadores de corrida e endurance.
+
+## Empresa
+
+- Razão social: Konecz Tecnologia e Inteligência Artificial LTDA
+- CNPJ: 67.685.840/0001-06
+- Cidade: Curitiba/PR, Brasil
+- Site: https://konecz.com (inglês: https://konecz.com/en/)
+- E-mail: contato@konecz.com
+- Fundador: Pedro Henrique Lahr, ORCID https://orcid.org/0009-0001-2206-4852
+
+## Mais
+
+- [Guia do site para IA](https://konecz.com/llms.txt) e [versão completa](https://konecz.com/llms-full.txt)
+- [Servidor MCP com as informações oficiais](https://konecz.com/mcp)
+- [Blog e papers](https://konecz.com/blog)
