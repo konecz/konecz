@@ -37,9 +37,12 @@ and review the code, while people decide what to build and sign off every releas
   <img alt="Tripulação da Konecz: Pedro Henrique Lahr e Vanessa Cristine, fundadores, cada um num barco de papel navegando. / Konecz crew: founders Pedro Henrique Lahr and Vanessa Cristine." src="https://raw.githubusercontent.com/konecz/konecz/output/tripulacao-claro.svg?v=ling5" width="100%">
 </picture>
 
+---
+
 <a id="projetos"></a>
 
-## Projetos
+<details>
+<summary><b>Projetos</b></summary>
 
 | Projeto | O que é | Onde |
 |---|---|---|
@@ -48,6 +51,8 @@ and review the code, while people decide what to build and sign off every releas
 | **Konectaz** | Fábrica de influenciadores de IA: cria o personagem (rosto, voz e personalidade) e produz os vídeos, do roteiro ao vídeo pronto para postar | [konecz.com/konectaz](https://konecz.com/konectaz) |
 | **Vigia Pix** | Transparência das emendas parlamentares Pix: o caminho do dinheiro da União até a prefeitura, sempre com a fonte oficial. Laravel, React e PostgreSQL | [vigiapix.konecz.com](https://vigiapix.konecz.com) |
 | **One for Coaches** | Sistema para treinadores de corrida e endurance: atletas, agenda, prescrição de treino e resultados. C#/.NET e PostgreSQL | [oneforcoaches.com](https://oneforcoaches.com) |
+
+</details>
 
 ---
 
