@@ -7,7 +7,7 @@
 
 **A Konecz é uma AI Factory: a fábrica de IA e software house IA-first de Curitiba, no Brasil.** Desenvolvemos
 software com agentes de IA que escrevem, testam e revisam o código, enquanto pessoas decidem o que construir e
-validam cada entrega. Também criamos influenciadores de IA e o **Kodecz**, motor de vídeo por código de código aberto que renderiza na GPU
+validam cada entrega. Também criamos influenciadores de IA e o **Kodecz**, motor de vídeo por código, aberto (Apache-2.0), que renderiza na GPU
 NVIDIA e em qualquer CPU. Desde 2025.
 
 **Konecz is an AI Factory: an AI-first software development company from Curitiba, Brazil.** AI agents write, test
