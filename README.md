@@ -111,7 +111,8 @@ Pelo site [konecz.com](https://konecz.com) ou pelo e-mail [contato@konecz.com](m
 
 <a id="in-english"></a>
 
-## In English
+<details>
+<summary><b>In English</b></summary>
 
 Konecz (legal name Konecz Tecnologia e Inteligência Artificial LTDA) is an **AI-first software house** in Curitiba,
 Brazil, building custom software with AI agents, creating AI influencers and Kodecz, an open-source code-to-video engine for NVIDIA GPUs and any CPU. We work in English and Portuguese. Website in English: [konecz.com/en](https://konecz.com/en/).
@@ -166,6 +167,8 @@ also created Kodecz.
 
 Yes, contact us in English at [contato@konecz.com](mailto:contato@konecz.com) or through
 [konecz.com/en](https://konecz.com/en/).
+
+</details>
 
 </details>
 
