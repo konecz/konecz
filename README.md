@@ -54,9 +54,12 @@ and review the code, while people decide what to build and sign off every releas
 | **Vigia Pix** | Transparência das emendas parlamentares Pix: o caminho do dinheiro da União até a prefeitura, sempre com a fonte oficial. Laravel, React e PostgreSQL | [vigiapix.konecz.com](https://vigiapix.konecz.com) |
 | **One for Coaches** | Sistema para treinadores de corrida e endurance: atletas, agenda, prescrição de treino e resultados. C#/.NET e PostgreSQL | [oneforcoaches.com](https://oneforcoaches.com) |
 
+---
+
 <a id="como-trabalhamos"></a>
 
-## Como trabalhamos
+<details>
+<summary><b>Como trabalhamos</b></summary>
 
 - **IA-first de verdade:** agentes de IA (Claude Code, Codex e outros) escrevem, testam e revisam o código; cada
   mudança passa por testes automáticos e por uma pessoa antes de ir para produção.
@@ -64,6 +67,10 @@ and review the code, while people decide what to build and sign off every releas
 - **Stack escolhida por projeto:** TypeScript, Rust, Elixir/Phoenix, Ruby on Rails, C#/.NET, Python e PHP/Laravel,
   conforme o problema pede.
 - **Pesquisa aberta:** publicamos método, dados e resultados negativos, como no paper do remotion-gpu.
+
+</details>
+
+---
 
 <a id="perguntas-frequentes"></a>
 
@@ -112,9 +119,9 @@ Pelo site [konecz.com](https://konecz.com) ou pelo e-mail [contato@konecz.com](m
 
 </details>
 
-<a id="in-english"></a>
+---
 
-<br>
+<a id="in-english"></a>
 
 <details>
 <summary><b>In English: projects, how we work and FAQ</b></summary>
@@ -176,6 +183,8 @@ Yes, contact us in English at [contato@konecz.com](mailto:contato@konecz.com) or
 </details>
 
 </details>
+
+---
 
 <sub>Konecz Tecnologia e Inteligência Artificial LTDA · CNPJ 67.685.840/0001-06 · Curitiba/PR, Brasil ·
 <a href="https://konecz.com">konecz.com</a> · <a href="https://konecz.com/llms.txt">llms.txt</a> ·
