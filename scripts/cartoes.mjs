@@ -4,7 +4,7 @@
 import { svg, esc, num, f, misturar, icone, logoDa } from "./desenho.mjs";
 import { fita, barco } from "./origami.mjs";
 
-const EQUIPE = [["Pedro Lahrs", "PL"], ["Vanessa Cristine", "VC"]];
+const EQUIPE = [["Pedro Henrique Lahr", "PL"], ["Vanessa Cristine", "VC"]];
 
 // Entrada dos gráficos quando a imagem carrega: anel enchendo, barra subindo, fatia abrindo do centro.
 const ENTRADA = `.enche{animation:enche 1.8s cubic-bezier(.3,0,.2,1) both}
@@ -155,7 +155,7 @@ ${entregas(t, d)}`, `${ENTRADA}
 export function tripulacao(t) {
   const W = 1200, H = 300;
   const barcos = EQUIPE.map(([nome], i) => {
-    const cx = 200 + i * 540, cy = 178;
+    const cx = 140 + i * 580, cy = 178;
     return `${barco(cx, cy, 92, { cor: t.azul, fundo: t.fundo, atraso: i * 0.37, giro0: i ? -0.35 : 0.35 })}
 <text x="${cx + 130}" y="${cy + 12}" class="g" font-size="32" font-weight="800" fill="${t.tinta}" letter-spacing="-.5">${esc(nome)}</text>`;
   }).join("\n");
