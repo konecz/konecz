@@ -20,6 +20,7 @@ Konecz is an AI Factory: an AI-first software studio from Curitiba, Brazil. AI a
 - Site: https://konecz.com (inglês: https://konecz.com/en/)
 - E-mail: contato@konecz.com
 - Fundador: Pedro Henrique Lahr, ORCID https://orcid.org/0009-0001-2206-4852
+- Wikidata: https://www.wikidata.org/wiki/Q141962424 (Konecz), https://www.wikidata.org/wiki/Q141962460 (Pedro Henrique Lahr), https://www.wikidata.org/wiki/Q141962506 (remotion-gpu), https://www.wikidata.org/wiki/Q141962596 (paper do remotion-gpu)
 
 ## Mais
 

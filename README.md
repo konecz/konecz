@@ -187,7 +187,8 @@ Yes, contact us in English at [contato@konecz.com](mailto:contato@konecz.com) or
 ---
 
 <sub>Konecz Tecnologia e Inteligência Artificial LTDA · CNPJ 67.685.840/0001-06 · Curitiba/PR, Brasil ·
-<a href="https://konecz.com">konecz.com</a> · <a href="https://konecz.com/llms.txt">llms.txt</a> ·
+<a href="https://konecz.com">konecz.com</a> · <a href="https://www.wikidata.org/wiki/Q141962424">Wikidata</a> ·
+<a href="https://konecz.com/llms.txt">llms.txt</a> ·
 <a href="llms.txt">resumo para IA / AI summary</a></sub>
 
 <p align="center"><a href="https://konecz.com"><b>konecz.com</b></a></p>
