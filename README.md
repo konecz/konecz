@@ -1,7 +1,7 @@
 <a href="https://konecz.com">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/konecz/konecz/output/cabecalho-escuro.svg?v=ling5">
-    <img alt="Konecz, AI Factory: fábrica de IA e software house IA-first de Curitiba, Brasil. A fita da logo da Konecz gira em 3D." src="https://raw.githubusercontent.com/konecz/konecz/output/cabecalho-claro.svg?v=ling5" width="100%">
+    <img alt="Konecz, AI Factory: fábrica de IA e software house IA-first de Curitiba, Brasil. A fita da logo da Konecz gira em 3D. / Konecz, AI Factory: AI-first software studio from Curitiba, Brazil." src="https://raw.githubusercontent.com/konecz/konecz/output/cabecalho-claro.svg?v=ling5" width="100%">
   </picture>
 </a>
 
@@ -9,36 +9,36 @@
 software com agentes de IA que escrevem, testam e revisam o código, enquanto pessoas decidem o que construir e
 validam cada entrega. Também criamos influenciadores de IA e pesquisamos render de vídeo na GPU NVIDIA. Desde 2025.
 
-<sub>**Konecz is an AI Factory: an AI-first software studio from Curitiba, Brazil.** AI agents write, test and review
-the code; people decide what to build and sign off every release. We also create AI influencers and research GPU
-video rendering.</sub>
+**Konecz is an AI Factory: an AI-first software development company from Curitiba, Brazil.** AI agents write, test
+and review the code, while people decide what to build and sign off every release. We also create AI influencers and
+research video rendering on NVIDIA GPUs. Since 2025.
 
 <p align="center">
   <a href="https://konecz.com">Site</a> ·
   <a href="#projetos">Projetos</a> ·
   <a href="#como-trabalhamos">Como trabalhamos</a> ·
   <a href="#perguntas-frequentes">Perguntas</a> ·
-  <a href="https://konecz.com/en/">English</a>
+  <a href="#in-english"><b>English</b></a>
 </p>
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/konecz/konecz/output/mar-escuro.svg?v=ling5">
-  <img alt="Mar de commits da Konecz: as contribuições do último ano no GitHub como um mar de linhas em 3D que ondula, com o barco de papel navegando no dia de hoje. Atualizado a cada 15 minutos." src="https://raw.githubusercontent.com/konecz/konecz/output/mar-claro.svg?v=ling5" width="100%">
+  <img alt="Mar de commits da Konecz: as contribuições do último ano no GitHub como um mar de linhas em 3D que ondula, com o barco de papel navegando no dia de hoje. Atualizado a cada 15 minutos. / Konecz commit sea: last year of GitHub contributions as 3D waves." src="https://raw.githubusercontent.com/konecz/konecz/output/mar-claro.svg?v=ling5" width="100%">
 </picture>
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/konecz/konecz/output/linguagens-escuro.svg?v=ling5">
-  <img alt="Linguagens de programação dos repositórios da Konecz (TypeScript, Rust, Elixir, C#, Ruby, Python, PHP e outras), cada uma com o anel cheio até a sua fatia do código." src="https://raw.githubusercontent.com/konecz/konecz/output/linguagens-claro.svg?v=ling5" width="100%">
+  <img alt="Linguagens de programação dos repositórios da Konecz (TypeScript, Rust, Elixir, C#, Ruby, Python, PHP e outras), cada uma com o anel cheio até a sua fatia do código. / Programming languages across Konecz repositories." src="https://raw.githubusercontent.com/konecz/konecz/output/linguagens-claro.svg?v=ling5" width="100%">
 </picture>
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/konecz/konecz/output/ritmo-escuro.svg?v=ling5">
-  <img alt="Ritmo de desenvolvimento da Konecz: commits por hora do dia num relógio de 24 horas e pull requests integrados por dia." src="https://raw.githubusercontent.com/konecz/konecz/output/ritmo-claro.svg?v=ling5" width="100%">
+  <img alt="Ritmo de desenvolvimento da Konecz: commits por hora do dia num relógio de 24 horas e pull requests integrados por dia. / Konecz development rhythm: commits by hour and merged pull requests per day." src="https://raw.githubusercontent.com/konecz/konecz/output/ritmo-claro.svg?v=ling5" width="100%">
 </picture>
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/konecz/konecz/output/tripulacao-escuro.svg?v=ling5">
-  <img alt="Tripulação da Konecz: Pedro Henrique Lahr e Vanessa Cristine, fundadores, cada um num barco de papel navegando." src="https://raw.githubusercontent.com/konecz/konecz/output/tripulacao-claro.svg?v=ling5" width="100%">
+  <img alt="Tripulação da Konecz: Pedro Henrique Lahr e Vanessa Cristine, fundadores, cada um num barco de papel navegando. / Konecz crew: founders Pedro Henrique Lahr and Vanessa Cristine." src="https://raw.githubusercontent.com/konecz/konecz/output/tripulacao-claro.svg?v=ling5" width="100%">
 </picture>
 
 <a id="projetos"></a>
@@ -93,9 +93,55 @@ Em Curitiba, Paraná, Brasil.
 
 Pelo site [konecz.com](https://konecz.com) ou pelo e-mail [contato@konecz.com](mailto:contato@konecz.com).
 
+<a id="in-english"></a>
+
+## In English
+
+Konecz (legal name Konecz Tecnologia e Inteligência Artificial LTDA) is an **AI-first software house** in Curitiba,
+Brazil, building custom software with AI agents, creating AI influencers and publishing open research on GPU video
+rendering. We work in English and Portuguese. Website in English: [konecz.com/en](https://konecz.com/en/).
+
+### Projects
+
+| Project | What it is | Link |
+|---|---|---|
+| **Kodecz** | Open-source (Apache-2.0) video rendering engine that turns a web page (HTML, CSS, JavaScript) into an MP4, frame by frame, on an NVIDIA GPU (NVENC) or on any CPU (x264). An alternative to Remotion and HyperFrames, built for AI agents | [konecz.com/kodecz](https://konecz.com/kodecz) |
+| **remotion-gpu** | Exports Remotion videos on an NVIDIA GPU and keeps the CPU free: 4.1× less CPU on a 75 s production video. Code, open benchmark, paper and a Claude Code skill | [repository](https://github.com/konecz/remotion-gpu) · [paper](https://konecz.com/en/blog/remotion-gpu) · [DOI](https://doi.org/10.6084/m9.figshare.34875540) |
+| **Konectaz** | AI influencer factory: creates the character (face, voice and personality) and produces the videos, from script to ready-to-post | [konecz.com/en/konectaz](https://konecz.com/en/konectaz) |
+| **Vigia Pix** | Transparency for Brazil's "Pix" parliamentary amendments: follows federal money down to each city, always with the official source. Laravel, React and PostgreSQL | [project page](https://konecz.com/en/projects/vigia-pix) |
+| **One for Coaches** | Platform for running and endurance coaches: athletes, schedule, training plans and results. C#/.NET and PostgreSQL | [project page](https://konecz.com/en/projects/one) |
+
+### How we work
+
+- **AI-first for real:** AI agents (Claude Code, Codex and others) write, test and review the code; every change goes
+  through automated tests and a human before it ships.
+- **Our own infrastructure:** our systems and CI run on our own server with an NVIDIA RTX 5090 GPU.
+- **The right stack per project:** TypeScript, Rust, Elixir/Phoenix, Ruby on Rails, C#/.NET, Python and PHP/Laravel.
+- **Open research:** we publish method, data and negative results, as in the remotion-gpu paper.
+
+### What is Konecz?
+
+Konecz is an AI Factory from Curitiba, Brazil: an AI-first software house that builds custom software with AI agents,
+creates AI influencers and researches GPU video rendering. Founded in 2025.
+
+### What does an AI-first software house mean?
+
+AI agents do most of the writing, testing and reviewing of the code, and the people on the team decide what to build
+and approve every release. Software ships faster without skipping tests or review.
+
+### Who founded Konecz?
+
+Pedro Henrique Lahr ([ORCID 0009-0001-2206-4852](https://orcid.org/0009-0001-2206-4852)) and Vanessa Cristine, who
+also created Kodecz.
+
+### Does Konecz work with clients outside Brazil?
+
+Yes, contact us in English at [contato@konecz.com](mailto:contato@konecz.com) or through
+[konecz.com/en](https://konecz.com/en/).
+
 <sub>Konecz Tecnologia e Inteligência Artificial LTDA · CNPJ 67.685.840/0001-06 · Curitiba/PR, Brasil ·
 <a href="https://konecz.com">konecz.com</a> · <a href="https://konecz.com/llms.txt">llms.txt</a> ·
-<a href="llms.txt">resumo para IA</a></sub>
+<a href="llms.txt">resumo para IA / AI summary</a></sub>
 
 <p align="center"><a href="https://konecz.com"><b>konecz.com</b></a></p>
 

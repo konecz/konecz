@@ -26,3 +26,14 @@ Konecz is an AI Factory: an AI-first software studio from Curitiba, Brazil. AI a
 - [Guia do site para IA](https://konecz.com/llms.txt) e [versão completa](https://konecz.com/llms-full.txt)
 - [Servidor MCP com as informações oficiais](https://konecz.com/mcp)
 - [Blog e papers](https://konecz.com/blog)
+
+## English
+
+Konecz (Konecz Tecnologia e Inteligência Artificial LTDA) is an AI Factory: an AI-first software development company from Curitiba, Brazil, founded in 2025 by Pedro Henrique Lahr and Vanessa Cristine. AI agents write, test and review the code; people decide what to build and approve every release. Konecz also creates AI influencers and publishes open research on GPU video rendering. It works in English and Portuguese.
+
+- [Kodecz](https://konecz.com/kodecz): open-source (Apache-2.0) video rendering engine that turns a web page into an MP4 on an NVIDIA GPU (NVENC) or any CPU (x264), without a screenshot per frame. Alternative to Remotion and HyperFrames, built for AI agents.
+- [remotion-gpu](https://github.com/konecz/remotion-gpu): exports Remotion videos on an NVIDIA GPU with the CPU free (4.1× less CPU on a 75 s video). Paper: https://konecz.com/en/blog/remotion-gpu · DOI: https://doi.org/10.6084/m9.figshare.34875540
+- [Konectaz](https://konecz.com/en/konectaz): AI influencer factory (character, voice and ready-to-post videos).
+- [Vigia Pix](https://konecz.com/en/projects/vigia-pix): transparency for Brazil's "Pix" parliamentary amendments, with the official source.
+- [One for Coaches](https://konecz.com/en/projects/one): platform for running and endurance coaches.
+- Website in English: https://konecz.com/en/ · Contact: contato@konecz.com
