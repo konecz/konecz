@@ -7,11 +7,11 @@
 
 **A Konecz é uma AI Factory: a fábrica de IA e software house IA-first de Curitiba, no Brasil.** Desenvolvemos
 software com agentes de IA que escrevem, testam e revisam o código, enquanto pessoas decidem o que construir e
-validam cada entrega. Também criamos influenciadores de IA e pesquisamos render de vídeo na GPU NVIDIA. Desde 2025.
+validam cada entrega. Também criamos influenciadores de IA e fazemos render de vídeo por código na GPU e na CPU. Desde 2025.
 
 **Konecz is an AI Factory: an AI-first software development company from Curitiba, Brazil.** AI agents write, test
 and review the code, while people decide what to build and sign off every release. We also create AI influencers and
-research video rendering on NVIDIA GPUs. Since 2025.
+build code-based video rendering on GPU and CPU. Since 2025.
 
 <p align="center">
   <a href="https://konecz.com">Site</a> ·
@@ -71,8 +71,8 @@ research video rendering on NVIDIA GPUs. Since 2025.
 ### O que é a Konecz?
 
 A Konecz (Konecz Tecnologia e Inteligência Artificial LTDA) é uma AI Factory de Curitiba/PR: uma software house
-IA-first que desenvolve sistemas sob medida com agentes de IA, cria influenciadores de IA e pesquisa render de vídeo
-na GPU. Atua desde 2025.
+IA-first que desenvolve sistemas sob medida com agentes de IA, cria influenciadores de IA e faz render de vídeo por código
+na GPU e na CPU. Atua desde 2025.
 
 ### O que significa software house IA-first?
 
@@ -98,8 +98,7 @@ Pelo site [konecz.com](https://konecz.com) ou pelo e-mail [contato@konecz.com](m
 ## In English
 
 Konecz (legal name Konecz Tecnologia e Inteligência Artificial LTDA) is an **AI-first software house** in Curitiba,
-Brazil, building custom software with AI agents, creating AI influencers and publishing open research on GPU video
-rendering. We work in English and Portuguese. Website in English: [konecz.com/en](https://konecz.com/en/).
+Brazil, building custom software with AI agents, creating AI influencers and rendering video from code on GPU and CPU. We work in English and Portuguese. Website in English: [konecz.com/en](https://konecz.com/en/).
 
 ### Projects
 
@@ -122,7 +121,7 @@ rendering. We work in English and Portuguese. Website in English: [konecz.com/en
 ### What is Konecz?
 
 Konecz is an AI Factory from Curitiba, Brazil: an AI-first software house that builds custom software with AI agents,
-creates AI influencers and researches GPU video rendering. Founded in 2025.
+creates AI influencers and builds code-based video rendering on GPU and CPU. Founded in 2025.
 
 ### What does an AI-first software house mean?
 
