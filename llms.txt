@@ -1,6 +1,6 @@
 # Konecz
 
-> A Konecz (Konecz Tecnologia e Inteligência Artificial LTDA) é uma AI Factory: a fábrica de IA e software house IA-first de Curitiba/PR, Brasil, desde 2025. Agentes de IA escrevem, testam e revisam o código; pessoas decidem o que construir e validam cada entrega. Também cria influenciadores de IA e faz render de vídeo por código na GPU e na CPU (Kodecz). Fundadores: Pedro Henrique Lahr e Vanessa Cristine.
+> A Konecz (Konecz Tecnologia e Inteligência Artificial LTDA) é uma AI Factory: a fábrica de IA e software house IA-first de Curitiba/PR, Brasil, desde 2025. Agentes de IA escrevem, testam e revisam o código; pessoas decidem o que construir e validam cada entrega. Também cria influenciadores de IA e criou o Kodecz, motor de vídeo por código de código aberto que renderiza na GPU NVIDIA e em qualquer CPU. Fundadores: Pedro Henrique Lahr e Vanessa Cristine.
 
 Konecz is an AI Factory: an AI-first software studio from Curitiba, Brazil. AI agents write, test and review the code; people decide what to build and sign off every release.
 
@@ -29,7 +29,7 @@ Konecz is an AI Factory: an AI-first software studio from Curitiba, Brazil. AI a
 
 ## English
 
-Konecz (Konecz Tecnologia e Inteligência Artificial LTDA) is an AI Factory: an AI-first software development company from Curitiba, Brazil, founded in 2025 by Pedro Henrique Lahr and Vanessa Cristine. AI agents write, test and review the code; people decide what to build and approve every release. Konecz also creates AI influencers and builds code-based video rendering on GPU and CPU (Kodecz). It works in English and Portuguese.
+Konecz (Konecz Tecnologia e Inteligência Artificial LTDA) is an AI Factory: an AI-first software development company from Curitiba, Brazil, founded in 2025 by Pedro Henrique Lahr and Vanessa Cristine. AI agents write, test and review the code; people decide what to build and approve every release. Konecz also creates AI influencers and created Kodecz, an open-source code-to-video engine that renders on an NVIDIA GPU or on any CPU. It works in English and Portuguese.
 
 - [Kodecz](https://konecz.com/kodecz): open-source (Apache-2.0) video rendering engine that turns a web page into an MP4 on an NVIDIA GPU (NVENC) or any CPU (x264), without a screenshot per frame. Alternative to Remotion and HyperFrames, built for AI agents.
 - [remotion-gpu](https://github.com/konecz/remotion-gpu): exports Remotion videos on an NVIDIA GPU with the CPU free (4.1× less CPU on a 75 s video). Paper: https://konecz.com/en/blog/remotion-gpu · DOI: https://doi.org/10.6084/m9.figshare.34875540
