@@ -67,7 +67,8 @@ and review the code, while people decide what to build and sign off every releas
 
 <a id="perguntas-frequentes"></a>
 
-## Perguntas frequentes
+<details>
+<summary><b>Perguntas frequentes</b></summary>
 
 <details>
 <summary><b>O que é a Konecz?</b></summary>
@@ -106,6 +107,8 @@ Em Curitiba, Paraná, Brasil.
 <summary><b>Como contratar a Konecz?</b></summary>
 
 Pelo site [konecz.com](https://konecz.com) ou pelo e-mail [contato@konecz.com](mailto:contato@konecz.com).
+
+</details>
 
 </details>
 
