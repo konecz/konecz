@@ -69,30 +69,45 @@ and review the code, while people decide what to build and sign off every releas
 
 ## Perguntas frequentes
 
-### O que é a Konecz?
+<details>
+<summary><b>O que é a Konecz?</b></summary>
 
 A Konecz (Konecz Tecnologia e Inteligência Artificial LTDA) é uma AI Factory de Curitiba/PR: uma software house
 IA-first que desenvolve sistemas sob medida com agentes de IA, cria influenciadores de IA e o Kodecz, motor de vídeo por código
 que renderiza na GPU NVIDIA e em qualquer CPU. Atua desde 2025.
 
-### O que significa software house IA-first?
+</details>
+
+<details>
+<summary><b>O que significa software house IA-first?</b></summary>
 
 Significa que agentes de IA fazem a maior parte da escrita, dos testes e da revisão do código, e as pessoas da equipe
 decidem o que construir e validam cada entrega. O resultado é software no ar mais rápido, sem abrir mão de testes e
 revisão.
 
-### Quem fundou a Konecz?
+</details>
+
+<details>
+<summary><b>Quem fundou a Konecz?</b></summary>
 
 Pedro Henrique Lahr ([ORCID 0009-0001-2206-4852](https://orcid.org/0009-0001-2206-4852)) e Vanessa Cristine, que
 também criaram o Kodecz.
 
-### Onde fica a Konecz?
+</details>
+
+<details>
+<summary><b>Onde fica a Konecz?</b></summary>
 
 Em Curitiba, Paraná, Brasil.
 
-### Como contratar a Konecz?
+</details>
+
+<details>
+<summary><b>Como contratar a Konecz?</b></summary>
 
 Pelo site [konecz.com](https://konecz.com) ou pelo e-mail [contato@konecz.com](mailto:contato@konecz.com).
+
+</details>
 
 <a id="in-english"></a>
 
@@ -119,26 +134,40 @@ Brazil, building custom software with AI agents, creating AI influencers and Kod
 - **The right stack per project:** TypeScript, Rust, Elixir/Phoenix, Ruby on Rails, C#/.NET, Python and PHP/Laravel.
 - **Open research:** we publish method, data and negative results, as in the remotion-gpu paper.
 
-### What is Konecz?
+### FAQ
+
+<details>
+<summary><b>What is Konecz?</b></summary>
 
 Konecz is an AI Factory from Curitiba, Brazil: an AI-first software house that builds custom software with AI agents,
 creates AI influencers and Kodecz, an open-source code-to-video engine that renders on an NVIDIA GPU or on any
 CPU. Founded in 2025.
 
-### What does an AI-first software house mean?
+</details>
+
+<details>
+<summary><b>What does an AI-first software house mean?</b></summary>
 
 AI agents do most of the writing, testing and reviewing of the code, and the people on the team decide what to build
 and approve every release. Software ships faster without skipping tests or review.
 
-### Who founded Konecz?
+</details>
+
+<details>
+<summary><b>Who founded Konecz?</b></summary>
 
 Pedro Henrique Lahr ([ORCID 0009-0001-2206-4852](https://orcid.org/0009-0001-2206-4852)) and Vanessa Cristine, who
 also created Kodecz.
 
-### Does Konecz work with clients outside Brazil?
+</details>
+
+<details>
+<summary><b>Does Konecz work with clients outside Brazil?</b></summary>
 
 Yes, contact us in English at [contato@konecz.com](mailto:contato@konecz.com) or through
 [konecz.com/en](https://konecz.com/en/).
+
+</details>
 
 <sub>Konecz Tecnologia e Inteligência Artificial LTDA · CNPJ 67.685.840/0001-06 · Curitiba/PR, Brasil ·
 <a href="https://konecz.com">konecz.com</a> · <a href="https://konecz.com/llms.txt">llms.txt</a> ·
