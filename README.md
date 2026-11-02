@@ -14,6 +14,8 @@ NVIDIA e em qualquer CPU. Desde 2025.
 and review the code, while people decide what to build and sign off every release. We also create AI influencers and
 **Kodecz**, an open-source code-to-video engine that renders on an NVIDIA GPU or on any CPU. Since 2025.
 
+**Fundadores / Founders:** [Pedro Henrique Lahr](https://konecz.com/pedrohenriquelahr) (Pedro Lahr), engenheiro de software e pesquisador / software engineer and researcher, e/and Vanessa Cristine.
+
 <p align="center">
   <a href="https://konecz.com">Site</a> ·
   <a href="#projetos">Projetos</a> ·
